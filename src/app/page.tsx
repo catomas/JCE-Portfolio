@@ -1,24 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
   const [isFirstVideoPlaying, setIsFirstVideoPlaying] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const firstVideoRef = useRef<HTMLVideoElement>(null);
+  const secondVideoRef = useRef<HTMLVideoElement>(null);
 
   const handleVideoEnd = () => {
     setIsFirstVideoPlaying(false);
-    if (videoRef.current) {
-      videoRef.current.play();
+    if (secondVideoRef.current) {
+      secondVideoRef.current.play();
     }
   };
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play();
-    }
-  }, [isFirstVideoPlaying]);
 
   return (
     <main className="font-vollkorn container py-36 ">
@@ -31,26 +25,23 @@ export default function Home() {
           placeat earum sed.
         </p>
 
-        {isFirstVideoPlaying ? (
-          <video
-            className="w-auto h-[420px]"
-            autoPlay
-            muted
-            onEnded={handleVideoEnd}
-          >
-            <source src="/videos/Main_white.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <video
-            ref={videoRef}
-            className="w-auto h-[420px]"
-            loop
-            muted
-            preload="auto"
-          >
-            <source src="/videos/loop_main_white_HD.mp4" type="video/mp4" />
-          </video>
-        )}
+        <video
+          ref={firstVideoRef}
+          className={`w-auto h-[470px] ${isFirstVideoPlaying ? "" : "hidden"}`}
+          autoPlay
+          muted
+          onEnded={handleVideoEnd}
+        >
+          <source src="/videos/Main_white.mp4" type="video/mp4" />
+        </video>
+        <video
+          ref={secondVideoRef}
+          className={`w-auto h-[470px] ${isFirstVideoPlaying ? "hidden" : ""}`}
+          loop
+          muted
+        >
+          <source src="/videos/loop_main_white_HD.mp4" type="video/mp4" />
+        </video>
       </div>
     </main>
   );
