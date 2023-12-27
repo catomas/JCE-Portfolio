@@ -3,9 +3,12 @@
 import { links } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
+import ThemeSwitch from "./theme-switch";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -20,31 +23,117 @@ const Navbar = () => {
     pathname === "/" ? "/" : pathname.replace("/", "");
 
   return (
-    <motion.nav
-      initial={{ y: -100, x: "-50%", opacity: 0 }}
-      animate={{ y: 0, x: "-50%", opacity: 1 }}
-      className=" p-6  rounded-full bg-[rgba(75,79,70,0.9)] fixed left-1/2 -translate-x-1/2 py-2 sm:top-[1.7rem]  shadow-2xl "
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="z-[999] font-vollkorn fixed bg-slate w-full top-0 left-0 bg-primary100 md:bg-transparent"
     >
-      <ul className="flex  w-[22rem] flex-wrap items-center justify-center gap-y-1 font-medium text-gray-300   sm:w-[initial] sm:flex-nowrap sm:gap-5">
-        {links.map((link) => (
-          <Link key={link.name} href={link.hash}>
-            <motion.div
-              animate={{ scale: 1.1 }}
-              whileHover={{ scale: 1.2 }}
-              className={clsx(
-                "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition    ",
-                {
-                  " bg-[rgba(133,135,122,0.9)] rounded-full text-white ":
-                    currentPathWithoutSlash === link.hash,
-                }
-              )}
-            >
-              {link.name}
-            </motion.div>
+      <nav className="max-w-[1700px] mx-auto h-20 md:h-28 flex justify-between items-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1,
+            delay: 0.5,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+          className="relative h-40 w-40  md:h-52 md:w-52 md:hidden lg:flex "
+        >
+          <Link href="/" onClick={handleSmalerScreensNavigation}>
+            <Image
+              fill
+              style={{ objectFit: "contain" }}
+              src="/logo.png"
+              alt="logo"
+            />
           </Link>
-        ))}
-      </ul>
-    </motion.nav>
+        </motion.div>
+
+        {/* large screens */}
+        <div className="flex items-center justify-center h-screen">
+          <div className="hidden md:flex p-6 rounded-full bg-[rgba(75,79,70,0.9)] fixed left-1/2 -translate-x-1/2  py-2 shadow-2xl ">
+            <ul className="flex items-center justify-center gap-y-1 font-medium text-gray-300 gap-3">
+              {links.map((link) => (
+                <Link key={link.name} href={link.hash}>
+                  <motion.div
+                    animate={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.2 }}
+                    className={cn(
+                      "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
+                      {
+                        " bg-[rgba(133,135,122,0.9)] rounded-full text-white ":
+                          currentPathWithoutSlash === link.hash,
+                      }
+                    )}
+                  >
+                    {link.name}
+                  </motion.div>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1,
+            delay: 0.5,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
+          className=" fixed bottom-5 right-5 lg:static"
+        >
+          <ThemeSwitch />
+        </motion.div>
+
+        {/* small screens */}
+        <div
+          onClick={handleSmalerScreensNavigation}
+          className="flex md:hidden text-primary rounded-full "
+        >
+          {menuIcon ? (
+            <AiOutlineClose size={25} />
+          ) : (
+            <AiOutlineMenu size={25} />
+          )}
+        </div>
+
+        {/** small screens menu */}
+        <div
+          className={
+            menuIcon
+              ? "md:hidden absolute top-20 right-0 bottom-0 left-0 flex justify-center items-center w-full h-screen bg-primary400   ease-in duration-300"
+              : "md:hidden absolute top-20 right-0 left-[-100%] flex justify-center items-center w-full h-screen bg-primary400 ease-out duration-300 opacity-0"
+          }
+        >
+          <div>
+            <ul className="flex flex-col items-center justify-center gap-y-1 text-2xl font-medium text-gray-300">
+              {links.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.hash}
+                  onClick={handleSmalerScreensNavigation}
+                >
+                  <div
+                    className={cn(
+                      "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
+                      {
+                        " bg-[rgba(133,135,122,1)] rounded-full text-white ":
+                          currentPathWithoutSlash === link.hash,
+                      }
+                    )}
+                  >
+                    {link.name}
+                  </div>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </motion.header>
   );
 };
 
