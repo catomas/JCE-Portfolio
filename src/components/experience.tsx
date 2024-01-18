@@ -190,7 +190,7 @@ export default function Experience() {
             {item.location}
           </p>
           <p className="!mt-1 !font-normal text-gray-700 italic ">
-            "{item.description}"
+            &quot;{item.description}&quot;
           </p>
 
           <div className=" sm:hidden absolute bottom-4 right-2 my-2">
