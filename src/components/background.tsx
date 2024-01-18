@@ -1,9 +1,9 @@
 const Background = () => {
   return (
-    <div className="relative isolate">
+    <div className="relative  isolate">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 o-z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        className="pointer-events-none absolute inset-x-0 o-z-10 transform-gpu overflow-hidden blur-3xl -top-20   sm:-top-80"
       >
         <div
           style={{

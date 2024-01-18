@@ -1,47 +1,35 @@
 "use client";
 
-import { useRef, useState } from "react";
+import IsometricVideos from "@/components/isometric-videos";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const [isFirstVideoPlaying, setIsFirstVideoPlaying] = useState(true);
-  const firstVideoRef = useRef<HTMLVideoElement>(null);
-  const secondVideoRef = useRef<HTMLVideoElement>(null);
-
-  const handleVideoEnd = () => {
-    setIsFirstVideoPlaying(false);
-    if (secondVideoRef.current) {
-      secondVideoRef.current.play();
-    }
-  };
+  const useMotionProps = () => ({
+    initial: { opacity: 0, scale: 0.5 },
+    animate: { opacity: 1, scale: 1 },
+    transition: {
+      duration: 2,
+      delay: 0.5,
+      ease: [0, 0.71, 0.2, 1.01],
+    },
+  });
 
   return (
-    <main className="font-vollkorn container py-36 ">
-      <h1 className="text-6xl sm:text-8xl pb-10">Juan Carlos Avalúos</h1>
-      <div className="flex">
-        <p className="  text-xl">
+    <main className="font-vollkorn ">
+      <motion.h1
+        {...useMotionProps()}
+        className=" text-4xl sm:text-6xl md:text-7xl lg:text-8xl pb-6  sm:pb-10"
+      >
+        Juan Carlos Avalúos
+      </motion.h1>
+      <div className="flex flex-col lg:flex-row">
+        <motion.p {...useMotionProps()} className="pb-6  sm:text-xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio eos
           deserunt beatae eaque officia eveniet ratione animi, necessitatibus
           dolor mollitia magni cum! Omnis labore neque blanditiis repudiandae,
           placeat earum sed.
-        </p>
-
-        <video
-          ref={firstVideoRef}
-          className={`w-auto h-[470px] ${isFirstVideoPlaying ? "" : "hidden"}`}
-          autoPlay
-          muted
-          onEnded={handleVideoEnd}
-        >
-          <source src="/videos/Main_white.mp4" type="video/mp4" />
-        </video>
-        <video
-          ref={secondVideoRef}
-          className={`w-auto h-[470px] ${isFirstVideoPlaying ? "hidden" : ""}`}
-          loop
-          muted
-        >
-          <source src="/videos/loop_main_white_HD.mp4" type="video/mp4" />
-        </video>
+        </motion.p>
+        <IsometricVideos />
       </div>
     </main>
   );

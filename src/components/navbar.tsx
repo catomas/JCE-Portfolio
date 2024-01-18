@@ -3,7 +3,7 @@
 import { links } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import ThemeSwitch from "./theme-switch";
@@ -27,7 +27,7 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="z-[999] font-vollkorn fixed bg-slate w-full top-0 left-0 bg-primary100 md:bg-transparent"
+      className="z-[999] font-vollkorn fixed bg-slate w-full top-0 left-0 bg-gray-50 border-b-2 md:border-b-0  py-3 md:bg-transparent"
     >
       <nav className="max-w-[1700px] mx-auto h-20 md:h-28 flex justify-between items-center p-4">
         <motion.div
@@ -91,7 +91,7 @@ const Navbar = () => {
         {/* small screens */}
         <div
           onClick={handleSmalerScreensNavigation}
-          className="flex md:hidden text-primary rounded-full "
+          className="flex md:hidden text-primary  rounded-full "
         >
           {menuIcon ? (
             <AiOutlineClose size={25} />
@@ -104,12 +104,12 @@ const Navbar = () => {
         <div
           className={
             menuIcon
-              ? "md:hidden absolute top-20 right-0 bottom-0 left-0 flex justify-center items-center w-full h-screen bg-primary400   ease-in duration-300"
-              : "md:hidden absolute top-20 right-0 left-[-100%] flex justify-center items-center w-full h-screen bg-primary400 ease-out duration-300 opacity-0"
+              ? "md:hidden absolute top-24 right-0 bottom-0 left-0 flex justify-center  w-full h-screen bg-gray-50   ease-in duration-300"
+              : "md:hidden absolute top-24 right-0 left-[-100%] flex justify-center   w-full h-screen bg-gray-50 ease-out duration-300 opacity-0"
           }
         >
           <div>
-            <ul className="flex flex-col items-center justify-center gap-y-1 text-2xl font-medium text-gray-300">
+            <ul className="flex flex-col items-center mt-20 justify-center gap-y-1 text-2xl font-medium text-gray-300">
               {links.map((link) => (
                 <Link
                   key={link.name}

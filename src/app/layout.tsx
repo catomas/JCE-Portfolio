@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${vollkorn.variable} ${workSans.variable} bg-gray-50 `}>
         <Background />
         <Navbar />
-        <div className="pt-28">{children}</div>
+        <div className="container py-32 sm:py-40 md:py-60 ">{children}</div>
       </body>
     </html>
   );
