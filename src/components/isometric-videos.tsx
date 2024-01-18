@@ -6,6 +6,20 @@ const IsometricVideos = () => {
   const firstVideoRef = useRef<HTMLVideoElement>(null);
   const secondVideoRef = useRef<HTMLVideoElement>(null);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleVideoLoad = () => {
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (firstVideoRef.current && firstVideoRef.current.readyState > 3) {
+      setIsLoading(false);
+    }
+  }, []);
+
+  console.log(isLoading);
+
   useEffect(() => {
     if (firstVideoRef.current) {
       firstVideoRef.current.playbackRate = 1.5;
@@ -19,15 +33,21 @@ const IsometricVideos = () => {
     }
   };
   return (
-    <>
+    <div className=" md:min-w-[500px] lg:min-w-[800px]">
+      {isLoading && (
+        <div className="flex justify-center items-center h-[400px] xl:min-h-[500px]">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        </div>
+      )}
       <video
         ref={firstVideoRef}
-        className={`w-auto border-none outline-none  max-h-[400px]  xl:min-h-[500px]  ${
+        className={`h-auto w-auto border-none outline-none    ${
           isFirstVideoPlaying ? "" : "hidden"
         }`}
         autoPlay
         muted
         onEnded={handleVideoEnd}
+        onLoadedData={handleVideoLoad}
         controls={false}
         playsInline
         preload="auto"
@@ -36,18 +56,17 @@ const IsometricVideos = () => {
       </video>
       <video
         ref={secondVideoRef}
-        className={`h-auto w-auto border-none outline-none  max-h-[400px] xl:min-h-[500px]  ${
+        className={`h-auto w-auto border-none outline-none    ${
           isFirstVideoPlaying ? "hidden" : ""
         }`}
         loop
         muted
         controls={false}
         playsInline
-        preload="auto"
       >
         <source src="/videos/loop_white_V2.mp4" type="video/mp4" />
       </video>
-    </>
+    </div>
   );
 };
 
