@@ -140,6 +140,7 @@ export default function Experience() {
     <VerticalTimeline lineColor="#e5e7eb">
       {experiencesData.map((item, index) => (
         <VerticalTimelineElement
+          key={index}
           visible={true}
           contentStyle={{
             background: "#f3f4f6",
