@@ -30,6 +30,7 @@ const IsometricVideos = () => {
         onEnded={handleVideoEnd}
         controls={false}
         playsInline
+        preload="auto"
       >
         <source src="/videos/Main_V5.mp4" type="video/mp4" />
       </video>
@@ -42,6 +43,7 @@ const IsometricVideos = () => {
         muted
         controls={false}
         playsInline
+        preload="auto"
       >
         <source src="/videos/loop_white_V2.mp4" type="video/mp4" />
       </video>
