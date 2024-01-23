@@ -87,6 +87,7 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+
     fontFamily: {
       vollkorn: "var(--font-vollkorn)",
       workSans: "var(--font-work-sans)",

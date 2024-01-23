@@ -4,7 +4,7 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { PiCertificate, PiHouseLineDuotone, PiTree } from "react-icons/pi";
+import { PiTree } from "react-icons/pi";
 import {
   GiDeliveryDrone,
   GiGrain,
@@ -18,14 +18,13 @@ import { FaEnvira, FaStreetView } from "react-icons/fa";
 import { MdOutlineHomeWork } from "react-icons/md";
 
 import "react-vertical-timeline-component/style.min.css";
-import Fade from "react-awesome-reveal";
 
 import React from "react";
 import { BsPersonWorkspace } from "react-icons/bs";
 
 const experiencesData = [
   {
-    title: "Zodoctenista",
+    title: "Zooctenista",
     location: "Universidad Nacional - Medellin",
     date: "1989 - 1994",
     icon: <GiPlantsAndAnimals />,

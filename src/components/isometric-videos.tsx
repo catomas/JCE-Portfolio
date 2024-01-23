@@ -50,9 +50,8 @@ const IsometricVideos = () => {
         onLoadedData={handleVideoLoad}
         controls={false}
         playsInline
-        preload="auto"
       >
-        <source src="/videos/Main_V5.mp4" type="video/mp4" />
+        <source src="/videos/main_comprimido.mp4" type="video/mp4" />
       </video>
       <video
         ref={secondVideoRef}
@@ -64,7 +63,7 @@ const IsometricVideos = () => {
         controls={false}
         playsInline
       >
-        <source src="/videos/loop_white_V2.mp4" type="video/mp4" />
+        <source src="/videos/loop_comprimido.mp4" type="video/mp4" />
       </video>
     </div>
   );

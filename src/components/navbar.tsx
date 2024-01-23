@@ -40,7 +40,7 @@ const Navbar = () => {
           }}
           className="relative h-40 w-40  md:h-52 md:w-52 md:hidden lg:flex "
         >
-          <Link href="/" onClick={handleSmalerScreensNavigation}>
+          <Link href="/">
             <Image
               fill
               style={{ objectFit: "contain" }}
