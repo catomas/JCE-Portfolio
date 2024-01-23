@@ -18,8 +18,6 @@ const IsometricVideos = () => {
     }
   }, []);
 
-  console.log(isLoading);
-
   useEffect(() => {
     if (firstVideoRef.current) {
       firstVideoRef.current.playbackRate = 1.5;
@@ -34,11 +32,11 @@ const IsometricVideos = () => {
   };
   return (
     <div className=" md:min-w-[500px] lg:min-w-[800px]">
-      {isLoading && (
+      {/* {isLoading && (
         <div className="flex justify-center items-center h-[400px] xl:min-h-[500px]">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
         </div>
-      )}
+      )} */}
       <video
         ref={firstVideoRef}
         className={`h-auto w-auto border-none outline-none    ${

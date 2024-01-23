@@ -32,7 +32,7 @@ export const CardsServices = () => {
     <div className="grid grid-cols-3 gap-4 ">
       {services.map((service) => {
         return (
-          <Card>
+          <Card key={service.title}>
             <CardHeader>
               <CardTitle>{service.title}</CardTitle>
               <CardDescription>{service.description}</CardDescription>
