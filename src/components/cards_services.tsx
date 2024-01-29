@@ -9,50 +9,31 @@ import {
 } from "./ui/card";
 import Image from "next/image";
 
-const services = [
-  {
-    title: "Avalúos",
-    description:
-      "Avalúos urbanos y rurales. Avalúos comerciales, catastrales, de garantía, de rentas, de maquinaria y equipos, de obras de arte, de vehículos, entre otros.",
-  },
-  {
-    title: "Asesorías Inmobiliarias",
-    description:
-      "Asesorías en compra, venta y arriendo de inmuebles. Asesorías en procesos de licitación y contratación de obras civiles.",
-  },
-  {
-    title: "Toma de Fotos & Videos Aéreos",
-    description:
-      "Consultorías en proyectos de inversión. Consultorías en proyectos de construcción.",
-  },
-];
+import { services } from "@/lib/data";
+import DialogService from "./dialog_service";
 
 export const CardsServices = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 ">
+    <div className="grid lg:grid-cols-2 gap-4 lg:mx-28">
       {services.map((service) => {
         return (
-          <Card key={service.title}>
+          <Card className="flex flex-col justify-between" key={service.title}>
             <CardHeader>
-              <CardTitle>{service.title}</CardTitle>
+              <CardTitle className="pb-2">{service.title}</CardTitle>
               <CardDescription>{service.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="px-4">
+              <div className="flex items-center justify-center px-4">
                 <Image
-                  src="icons/drone_v1.svg"
-                  width={1200}
-                  height={550}
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                  }}
-                  alt=""
+                  src={service.image}
+                  width={300}
+                  height={400}
+                  alt={`${service.title} image`}
                 />
               </div>
             </CardContent>
-            <CardFooter>
-              <p>Saber más</p>
+            <CardFooter className="flex justify-end">
+              <DialogService />
             </CardFooter>
           </Card>
         );

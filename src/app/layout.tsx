@@ -3,6 +3,7 @@ import { Vollkorn, Work_Sans } from "next/font/google";
 import "./globals.css";
 import Background from "@/components/background";
 import Navbar from "@/components/navbar";
+import { ToastProvider } from "@/providers/toast-provider";
 
 const vollkorn = Vollkorn({ subsets: ["latin"], variable: "--font-vollkorn" });
 const workSans = Work_Sans({
@@ -11,8 +12,8 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Juan Carlos Avalúos | Avaluos Inmobiliarios ",
-  description: "Avaluos Inmobiliarios | Juan Carlos Avalúos",
+  title: "Juan Carlos Echeverri Avalúos | Avaluos Inmobiliarios ",
+  description: "Avaluos Inmobiliarios | Juan Carlos Echeverri Avalúos",
 };
 
 export default function RootLayout({
@@ -23,9 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${vollkorn.variable} ${workSans.variable} bg-gray-50 `}>
+        <ToastProvider />
         <Background />
         <Navbar />
-        <div className="container py-32 sm:py-40 md:py-60 ">{children}</div>
+        <div className="container py-32 sm:py-40 md:py-44">{children}</div>
       </body>
     </html>
   );
