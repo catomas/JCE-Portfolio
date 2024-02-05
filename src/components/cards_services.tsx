@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import {
   Card,
   CardHeader,
@@ -23,12 +24,14 @@ export const CardsServices = () => {
               <CardDescription>{service.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-center px-4">
+              <div className="flex items-center justify-center px-4 h-[250px] ">
                 <Image
                   src={service.image}
-                  width={300}
-                  height={400}
+                  width={250}
+                  height={250}
                   alt={`${service.title} image`}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4="
                 />
               </div>
             </CardContent>

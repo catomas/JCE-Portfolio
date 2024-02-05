@@ -4,7 +4,7 @@ import { links } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import ThemeSwitch from "./theme-switch";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
@@ -51,6 +51,7 @@ const Navbar = () => {
         </motion.div>
 
         {/* large screens */}
+
         <div className="flex items-center justify-center h-screen">
           <div className="hidden md:flex p-6 rounded-full bg-[rgba(75,79,70,0.9)] fixed left-1/2 -translate-x-1/2  py-2 shadow-2xl ">
             <ul className="flex items-center justify-center gap-y-1 font-medium text-gray-300 gap-3">
