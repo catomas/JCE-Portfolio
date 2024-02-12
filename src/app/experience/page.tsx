@@ -7,11 +7,7 @@ export const metadata: Metadata = {
 };
 
 const ExperiencePage = () => {
-  return (
-    <div>
-      <Experience />
-    </div>
-  );
+  return <Experience />;
 };
 
 export default ExperiencePage;

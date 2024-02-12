@@ -10,9 +10,9 @@ export const ProjectsCounter = () => {
         ({ id, endCounter, text, lineRight, lineRightMobile }) => (
           <div key={id} className={`${lineRight && "ltr"}`}>
             <div
-              className={`border-2 border-transparent ${
-                lineRight && "px-4 md:border-e-primary400 "
-              } ${lineRightMobile && "border-e-gray-100"}`}
+              className={` px-4 border-2 border-transparent ${
+                lineRight && " md:border-e-secondary100 "
+              } ${lineRightMobile && " border-e-secondary100"}`}
             >
               <p className="flex mb-2 text-2xl font-extrabold md:text-4xl text-primary400">
                 +{" "}

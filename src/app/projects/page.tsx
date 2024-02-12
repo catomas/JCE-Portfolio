@@ -3,7 +3,7 @@ import { ProjectsCounter } from "@/components/projects_counter";
 
 const ProjectsPage = () => {
   return (
-    <div className="container flex flex-col justify-center items-center gap-12">
+    <div className=" flex flex-col justify-center items-center gap-12">
       <ProjectsCounter />
       <ProjectsCarousel />
     </div>
