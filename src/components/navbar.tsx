@@ -4,9 +4,8 @@ import { links } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import ThemeSwitch from "./theme-switch";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { WhatsappLink } from "./whatsapp_link";
@@ -39,12 +38,14 @@ const Navbar = () => {
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-          className="relative h-40 w-40  md:h-52 md:w-52 md:hidden lg:flex "
+          className=" flex items-center justify-center relative h-40 w-40  md:h-52 md:w-52 md:hidden lg:flex "
         >
           <Link href="/">
             <Image
-              fill
-              style={{ objectFit: "contain" }}
+              priority
+              height={200}
+              width={200}
+              style={{ width: "100%", height: "auto" }}
               src="/logo.png"
               alt="logo"
             />
