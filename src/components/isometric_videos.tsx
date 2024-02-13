@@ -38,6 +38,7 @@ const IsometricVideos = () => {
         </div>
       )} */}
       <video
+        poster="/images/placeholdervideo.svg"
         ref={firstVideoRef}
         className={`h-auto w-auto border-none outline-none    ${
           isFirstVideoPlaying ? "" : "hidden"
@@ -52,6 +53,7 @@ const IsometricVideos = () => {
         <source src="/videos/main_comprimido.mp4" type="video/mp4" />
       </video>
       <video
+        poster="/images/placeholdervideo.svg"
         ref={secondVideoRef}
         className={`h-auto w-auto border-none outline-none    ${
           isFirstVideoPlaying ? "hidden" : ""
