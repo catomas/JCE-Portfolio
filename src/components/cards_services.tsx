@@ -35,7 +35,7 @@ export const CardsServices = () => {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">
-                <DialogService />
+                <DialogService service={service} />
               </CardFooter>
             </div>
           </Card>

@@ -9,6 +9,7 @@ import Image from "next/image";
 import ThemeSwitch from "./theme-switch";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { cn } from "@/lib/utils";
+import { WhatsappLink } from "./whatsapp_link";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -49,9 +50,7 @@ const Navbar = () => {
             />
           </Link>
         </motion.div>
-
         {/* large screens */}
-
         <div className="flex items-center justify-center h-screen">
           <div className="hidden md:flex p-6 rounded-full bg-[rgba(75,79,70,0.9)] fixed left-1/2 -translate-x-1/2  py-2 shadow-2xl ">
             <ul className="flex items-center justify-center gap-y-1 font-medium text-gray-300 gap-3">
@@ -75,8 +74,7 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
-
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
@@ -87,8 +85,8 @@ const Navbar = () => {
           className=" fixed bottom-5 right-5 lg:static"
         >
           <ThemeSwitch />
-        </motion.div>
-
+        </motion.div> */}{" "}
+        {/* TODO: uncomment this line to enable the theme switcher */}
         {/* small screens */}
         <div
           onClick={handleSmalerScreensNavigation}
@@ -100,7 +98,6 @@ const Navbar = () => {
             <AiOutlineMenu size={25} />
           )}
         </div>
-
         {/** small screens menu */}
         <div
           className={
@@ -134,6 +131,18 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1,
+          delay: 0.5,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+        className="  fixed bottom-5 right-5 md:bottom-7 md:right-10"
+      >
+        <WhatsappLink />
+      </motion.div>
     </motion.header>
   );
 };

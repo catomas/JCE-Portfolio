@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { services } from "../lib/data";
 import {
   Dialog,
   DialogContent,
@@ -10,26 +11,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Service } from "@/lib/interfaces";
+import Image from "next/image";
 
-export default function DialogService() {
+interface DialogServiceProps {
+  service: Service;
+}
+
+export default function DialogService({ service }: DialogServiceProps) {
+  const detailsWithBoldNumbers = service.details.replace(
+    /(\d+)/g,
+    "<strong>$1</strong>"
+  );
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Saber más</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className=" max-h-screen  moverflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+          <DialogTitle>{service.title}</DialogTitle>
+          <DialogDescription className=" whitespace-pre-line ">
+            <p dangerouslySetInnerHTML={{ __html: detailsWithBoldNumbers }} />
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">name</div>
-          <div className="grid grid-cols-4 items-center gap-4">Username</div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
+
+        <DialogFooter className=" flex !justify-center items-center">
+          <div className=" w-[200px] md:w-[300px]  ">
+            <Image src="icons/park.svg" width={300} height={300} alt="park" />
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

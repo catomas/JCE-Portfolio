@@ -1,4 +1,4 @@
-import { Project } from "./interfaces";
+import { Project, Service } from "./interfaces";
 
 export const links = [
   {
@@ -23,18 +23,37 @@ export const links = [
   },
 ] as const;
 
-export const services = [
+export const services: Service[] = [
   {
     title: "Avalúos",
     description:
       "Avalúos urbanos y rurales. Avalúos comerciales, catastrales, de garantía, de rentas, de maquinaria y equipos, de obras de arte, de vehículos, entre otros.",
     image: "icons/house_rent.svg",
+    details: `
+    Ofrecemos servicios de avalúo en una variedad de categorías, cada una diseñada para abarcar un espectro específico de activos y propiedades. Estas categorías incluyen:
+    
+    1. Inmuebles Urbanos
+    2. Inmuebles Rurales
+    3. Recursos Naturales y Suelos de Protección
+    4. Obras de Infraestructura
+    5. Edificaciones de Conservación Arqueológica y Monumentos Históricos
+    6. Inmuebles Especiales
+    7. Maquinaria Fija, Equipos y Maquinaria Móvil
+    8. Maquinaria y Equipos Especiales
+    9. Obras de Arte, Orfebrería, Patrimoniales y Similares
+    10. Semovientes y Animales
+    11. Activos Operacionales y Establecimientos de Comercio
+    12. Intangibles
+    13. Intangibles Especiales
+    `,
   },
   {
     title: "Asesorías Inmobiliarias",
     description:
       "Asesorías en compra, venta y arriendo de inmuebles. Asesorías en procesos de licitación y contratación de obras civiles.",
     image: "icons/house.svg",
+    details:
+      "En nuestro servicio de asesoría inmobiliaria, no solo facilitamos la compra o venta de inmuebles, sino que también acompañamos al cliente en cada paso del proceso. Desde la búsqueda y captación de propiedades hasta la negociación y escrituración. Además, nos dedicamos activamente a la captación de nuevos inmuebles para la venta y la atracción de posibles clientes. Nuestra meta es asegurar transacciones exitosas y satisfactorias para todas las partes involucradas.",
   },
   {
     title: "Toma de Fotos & Videos Aéreos",
@@ -42,12 +61,16 @@ export const services = [
       "Captura imágenes y videos aéreos para resaltar la singularidad y perspectiva única de tus propiedades.",
 
     image: "icons/drone_v1.svg",
+    details:
+      "Nos especializamos en la captura de imágenes aéreas, tanto en fotografía como en video, para una variedad de propiedades, incluyendo lotes, fincas, casas y fachadas. Utilizamos drones de última generación para obtener vistas impresionantes y detalladas desde el cielo. Con más de 7 años de experiencia en el uso de esta tecnología, garantizamos resultados de alta calidad y precisión en cada proyecto.",
   },
   {
     title: "Estudios Topograficos, Ortofotos y Alinderamientos",
     description:
       "Realizamos estudios detallados, generación de ortofotos y alinderamientos para proporcionar información completa y precisa sobre la topografía.",
-    image: "icons/topo3.svg",
+    image: "icons/topo.svg",
+    details:
+      "Nos especializamos en levantamientos topográficos completos, que incluyen la generación de planos detallados, curvas de nivel y la verificación de linderos de propiedades utilizando escrituras, planos catastrales y levantamientos planimétricos. Además, ofrecemos servicios de ortofotografía para proporcionar representaciones fotográficas georreferenciadas del terreno, asegurando precisión y detalle en cada proyecto.",
   },
 ];
 
@@ -85,7 +108,8 @@ export const dataCounter = [
 export const projects: Project[] = [
   {
     title: "Fincas Ganaderas Cimitarra",
-    description: "Falta descripción", //TODO: Add description
+    description:
+      "Hemos llevado a cabo avalúos de fincas ganaderas, casa fincas y lotes. Nuestros servicios de valoración abarcan diversos tipos de propiedades, proporcionando evaluaciones precisas que reflejan el valor actual del mercado en esta región",
     images: [
       "/images/cimitarra/img_1.jpg",
       "/images/cimitarra/img_2.jpg",
@@ -174,7 +198,8 @@ export const projects: Project[] = [
   },
   {
     title: "Avalúo de Maquinaria Pesada",
-    description: "Falta descripción", //TODO: Add description
+    description:
+      "Realizamos avalúos precisos de maquinaria pesada, considerando factores clave como antigüedad, mantenimiento y horas de operación. Ya sea para compra, venta o gestión de activos, proporcionamos información confiable",
     images: [
       "/images/maquinaria/img_1.jpg",
       "/images/maquinaria/img_2.jpg",
