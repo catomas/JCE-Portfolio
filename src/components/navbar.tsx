@@ -56,21 +56,23 @@ const Navbar = () => {
           <div className="hidden md:flex p-6 rounded-full bg-[rgba(75,79,70,0.9)] fixed left-1/2 -translate-x-1/2  py-2 shadow-2xl ">
             <ul className="flex items-center justify-center gap-y-1 font-medium text-gray-300 gap-3">
               {links.map((link) => (
-                <Link key={link.name} href={link.hash}>
-                  <motion.div
-                    animate={{ scale: 1.1 }}
-                    whileHover={{ scale: 1.2 }}
-                    className={cn(
-                      "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
-                      {
-                        " bg-[rgba(133,135,122,0.9)] rounded-full text-white ":
-                          currentPathWithoutSlash === link.hash,
-                      }
-                    )}
-                  >
-                    {link.name}
-                  </motion.div>
-                </Link>
+                <li key={link.name}>
+                  <Link href={link.hash}>
+                    <motion.div
+                      animate={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.2 }}
+                      className={cn(
+                        "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
+                        {
+                          " bg-[rgba(133,135,122,0.9)] rounded-full text-white ":
+                            currentPathWithoutSlash === link.hash,
+                        }
+                      )}
+                    >
+                      {link.name}
+                    </motion.div>
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
@@ -110,23 +112,24 @@ const Navbar = () => {
           <div>
             <ul className="flex flex-col items-center mt-20 justify-center gap-y-1 text-2xl font-medium text-gray-300">
               {links.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.hash}
-                  onClick={handleSmalerScreensNavigation}
-                >
-                  <div
-                    className={cn(
-                      "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
-                      {
-                        " bg-[rgba(133,135,122,1)] rounded-full text-white ":
-                          currentPathWithoutSlash === link.hash,
-                      }
-                    )}
+                <li key={link.name}>
+                  <Link
+                    href={link.hash}
+                    onClick={handleSmalerScreensNavigation}
                   >
-                    {link.name}
-                  </div>
-                </Link>
+                    <div
+                      className={cn(
+                        "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
+                        {
+                          " bg-[rgba(133,135,122,1)] rounded-full text-white ":
+                            currentPathWithoutSlash === link.hash,
+                        }
+                      )}
+                    >
+                      {link.name}
+                    </div>
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>

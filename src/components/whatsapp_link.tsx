@@ -8,6 +8,7 @@ export const WhatsappLink = () => {
   return (
     <Link
       target="_blank"
+      aria-label="whatsapp link"
       href={href}
       className="w-[3rem] h-[3rem]  flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all "
     >
