@@ -3,7 +3,7 @@ import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 export const WhatsappLink = () => {
-  const href = `https://wa.me/573164156157?text=Hola%20Juan%20Carlos%20Echeverri,%20estoy%20interesado%20en%20un%20avalúo%20inmobiliario.🏠`;
+  const href = `https://wa.me/573164156157?text=Hola%20Juan%20Carlos%20Echeverri,%20estoy%20interesado%20en%20un%20avalúo%20inmobiliario.`;
 
   return (
     <Link

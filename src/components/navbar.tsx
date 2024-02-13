@@ -46,7 +46,7 @@ const Navbar = () => {
               height={200}
               width={200}
               style={{ width: "100%", height: "auto" }}
-              src="/logo.png"
+              src="/logo_compress.png"
               alt="logo"
             />
           </Link>
