@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaInstagram } from "react-icons/fa";
-import { IoLogoInstagram } from "react-icons/io5";
 import { MdLocalPhone, MdOutlineEmail } from "react-icons/md";
-import { GrInstagram } from "react-icons/gr";
 import { LuInstagram } from "react-icons/lu";
 
 export const ContactMe = () => {

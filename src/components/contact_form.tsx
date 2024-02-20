@@ -59,23 +59,20 @@ export const ContactForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
 
-    const data = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    }).then((res) => {
-      if (!res.ok) throw new Error("Error al enviar el mensaje");
-      res.json();
-    });
-
     try {
-      await data;
-      setIsSubmitting(false);
-      toast.success("Mensaje enviado");
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) throw new Error("Error al enviar el mensaje");
 
       form.reset();
+      setIsSubmitting(false);
+      toast.success("Mensaje enviado correctamente");
     } catch (error) {
       setIsSubmitting(false);
       toast.error("Error al enviar el mensaje");
