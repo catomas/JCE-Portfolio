@@ -14,13 +14,13 @@ export const experiencesData = [
     date: "1989 - 1994",
     icon: <GiPlantsAndAnimals />,
     description:
-      "Estudié la producción animal, lo cual me ayudó en la valoración de semovientes y animales, así como en la construcción de instalaciones para la producción animal.",
+      "Estudié la producción animal, lo cual me ayuda en la valoración tanto de semovientes y animales, como de las construcciones rurales y sus instalaciones para la producción animal.",
     category: "Educación",
   },
   {
     title: "Gerencia de Mercadeo - Director de Marketing",
     location:
-      "Institución Universitaria SEIPA - Medellin \n  Escuela Adminstración de Empresas - Barcelona, España",
+      "Institución Universitaria CEIPA - Medellin \n  Escuela Adminstración de Empresas - Barcelona, España",
     date: "1999 - 2000",
     icon: <RiShoppingBasket2Line />,
     description:
@@ -69,7 +69,7 @@ export const experiencesData = [
     date: "2017",
     icon: <TbDrone />,
     description:
-      "Obtuve la certificación como Piloto de Operaciones con RPAS. Esta formación me permitió adquirir habilidades especializadas en la operación segura y eficiente de drones, particularmente para la toma de fotografías y videos aéreos. Esta capacitación amplió mis capacidades para ofrecer servicios de valoración inmobiliaria y otros trabajos aéreos.",
+      "Obtuve la certificación como Piloto de Operaciones con RPAS. Esta formación me permitió adquirir habilidades especializadas en la operación segura y eficiente de drones, particularmente para la toma de fotografías y videos aéreos. Esta capacitación amplió mis capacidades para ofrecer servicios de valoración inmobiliaria.",
     category: "Educación",
   },
   {

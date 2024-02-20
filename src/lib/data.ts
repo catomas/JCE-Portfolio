@@ -27,7 +27,7 @@ export const services: Service[] = [
   {
     title: "Avalúos",
     description:
-      "Avalúos urbanos y rurales. Avalúos comerciales, catastrales, de garantía, de rentas, de maquinaria y equipos, de obras de arte, de vehículos, entre otros.",
+      "Avalúos urbanos y rurales. Avalúos comerciales, de garantía, de rentas, de maquinaria y equipos, de obras de arte, de vehículos, entre otros.",
     image: "icons/house_rent.svg",
     details: `
     Ofrecemos servicios de avalúo en una variedad de categorías, cada una diseñada para abarcar un espectro específico de activos y propiedades. Estas categorías incluyen:
@@ -77,28 +77,28 @@ export const services: Service[] = [
 export const dataCounter = [
   {
     id: 0,
-    endCounter: 10,
+    endCounter: 18,
     text: "Años de experiencia",
     lineRight: true,
     lineRightMobile: true,
   },
   {
     id: 1,
-    endCounter: 230,
+    endCounter: 900,
     text: "Clientes satisfechos",
     lineRight: true,
     lineRightMobile: false,
   },
   {
     id: 2,
-    endCounter: 240,
+    endCounter: 1200,
     text: "Avaluos completados",
     lineRight: true,
     lineRightMobile: true,
   },
   {
     id: 3,
-    endCounter: 24,
+    endCounter: 14,
     text: "Certificados y Estudios",
     lineRight: false,
     lineRightMobile: false,

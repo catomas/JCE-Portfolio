@@ -62,7 +62,7 @@ const Navbar = () => {
                       animate={{ scale: 1.1 }}
                       whileHover={{ scale: 1.2 }}
                       className={cn(
-                        "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
+                        "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white transition-[0.5s] duration-[ease-in-out] ",
                         {
                           " bg-[rgba(133,135,122,0.9)] rounded-full text-white ":
                             currentPathWithoutSlash === link.hash,

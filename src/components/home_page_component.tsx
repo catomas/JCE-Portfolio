@@ -20,7 +20,7 @@ export const HomePageComponent = () => {
         {...useMotionProps()}
         className=" text-4xl sm:text-6xl md:text-7xl lg:text-8xl pb-6  sm:pb-10"
       >
-        Juan Carlos Avalúos
+        Juan Carlos Echeverri Avalúos
       </motion.h1>
       <div className="flex flex-col lg:flex-row">
         <motion.p {...useMotionProps()} className="pb-6  sm:text-xl">
