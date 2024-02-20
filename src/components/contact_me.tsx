@@ -9,17 +9,12 @@ import { LuInstagram } from "react-icons/lu";
 export const ContactMe = () => {
   return (
     <div className="  flex flex-col lg:pr-20">
-      <h1 className=" font-vollkorn text-4xl md:text-6xl md:mx-auto">
-        Contactame
-      </h1>
-      <h2 className="  font-vollkorn mt-4 text-xl md:text-2xl font-semibold">
-        Trabajemos juntos
-      </h2>
-      <p className="  text-lg mt-4 mb-9">
-        Si estás interesado en mis servicios de evaluación o tienes alguna
+      <h1 className=" font-vollkorn text-4xl md:text-6xl ">Contactame</h1>
+      <p className=" font-vollkorn italic text-lg   mt-2 mb-7">
+        &quot;Si estás interesado en mis servicios de evaluación o tienes alguna
         pregunta, no dudes en ponerte en contacto conmigo. Estoy aquí para
         ayudarte a encontrar soluciones adecuadas para tus necesidades de
-        valoración.
+        valoración.&quot;
       </p>
 
       <Link href="tel:+573164156157" target="_blank" className="flex mt-2 ">
@@ -33,7 +28,7 @@ export const ContactMe = () => {
         className="flex mt-2"
       >
         <MdOutlineEmail size="25" />
-        <h4 className="ml-2 font-workSans text-lg   ">
+        <h4 className="ml-2 font-workSans text-lg">
           juancarlos@juancarlosavaluos.com
         </h4>
       </Link>
