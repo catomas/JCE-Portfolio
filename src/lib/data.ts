@@ -27,10 +27,10 @@ export const services: Service[] = [
   {
     title: "Avalúos",
     description:
-      "Avalúos urbanos y rurales. Avalúos comerciales, de garantía, de rentas, de maquinaria y equipos, de obras de arte, de vehículos, entre otros.",
+      "Realizamos avalúos comerciales tanto en áreas urbanas como rurales en todo el país.",
     image: "icons/house_rent.svg",
     details: `
-    Ofrecemos servicios de avalúo en una variedad de categorías, cada una diseñada para abarcar un espectro específico de activos y propiedades. Estas categorías incluyen:
+    Ofrecemos servicios de avalúo en todas las categorías, cada una diseñada para abarcar un espectro específico de activos y propiedades. Estas categorías incluyen:
     
     1. Inmuebles Urbanos
     2. Inmuebles Rurales
@@ -50,7 +50,7 @@ export const services: Service[] = [
   {
     title: "Asesorías Inmobiliarias",
     description:
-      "Asesorías en compra, venta y arriendo de inmuebles. Asesorías en procesos de licitación y contratación de obras civiles.",
+      "Acompañamos al cliente en todo el proceso de compra o venta de inmuebles, incluyendo transacciones y escrituración. También nos encargamos de captar nuevos inmuebles, buscar clientes y negociar.",
     image: "icons/house.svg",
     details:
       "En nuestro servicio de asesoría inmobiliaria, no solo facilitamos la compra o venta de inmuebles, sino que también acompañamos al cliente en cada paso del proceso. Desde la búsqueda y captación de propiedades hasta la negociación y escrituración. Además, nos dedicamos activamente a la captación de nuevos inmuebles para la venta y la atracción de posibles clientes. Nuestra meta es asegurar transacciones exitosas y satisfactorias para todas las partes involucradas.",
@@ -58,7 +58,7 @@ export const services: Service[] = [
   {
     title: "Toma de Fotos & Videos Aéreos",
     description:
-      "Captura imágenes y videos aéreos para resaltar la singularidad y perspectiva única de tus propiedades.",
+      "Realizamos tomas aéreas (fotos y videos) de lotes, fincas, casas y fachadas utilizando drones. Contamos con 7 años de experiencia en el uso de esta tecnología.",
 
     image: "icons/drone_v1.svg",
     details:
@@ -67,7 +67,7 @@ export const services: Service[] = [
   {
     title: "Estudios Topograficos, Ortofotos y Alinderamientos",
     description:
-      "Realizamos estudios detallados, generación de ortofotos y alinderamientos para proporcionar información completa y precisa sobre la topografía.",
+      "Realizamos levantamientos topográficos y revisamos linderos de propiedades basándonos en escrituras y planos catastrales. También ofrecemos ortofotografías.",
     image: "icons/topo.svg",
     details:
       "Nos especializamos en levantamientos topográficos completos, que incluyen la generación de planos detallados, curvas de nivel y la verificación de linderos de propiedades utilizando escrituras, planos catastrales y levantamientos planimétricos. Además, ofrecemos servicios de ortofotografía para proporcionar representaciones fotográficas georreferenciadas del terreno, asegurando precisión y detalle en cada proyecto.",

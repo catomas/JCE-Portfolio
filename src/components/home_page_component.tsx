@@ -21,7 +21,7 @@ export const HomePageComponent = () => {
         {...useMotionProps()}
         className=" text-4xl sm:text-6xl md:text-7xl  pb-6  sm:pb-10"
       >
-        Juan Carlos Echeverri Avalúos
+        Juan Carlos Echeverri F Avalúos
       </motion.h1>
       <div className="flex flex-col lg:flex-row">
         <motion.div {...useMotionProps()} className="pb-6 italic  sm:text-xl">
