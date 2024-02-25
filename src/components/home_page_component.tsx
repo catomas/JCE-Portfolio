@@ -27,17 +27,24 @@ export const HomePageComponent = () => {
         <motion.div {...useMotionProps()} className="pb-6 italic  sm:text-xl">
           <p>
             &quot;Soy un experimentado avaluador certificado por la Lonja de
-            Avaluadores, con una sólida trayectoria en el campo de la valoración
-            de bienes. Con años de experiencia en la industria, estoy
+            Avaluadores y la A.N.A, con una sólida trayectoria en el campo de la
+            valoración de bienes. Con años de experiencia en la industria, estoy
             comprometido a proporcionar evaluaciones precisas y confiables para
             una variedad de propósitos&quot;
           </p>
-          <div className="flex  items-end justify-end">
+          <div className="flex gap-4  items-end justify-end">
             <Image
-              className="mt-5"
-              src="/images/logo-longa.png"
-              width={50}
-              height={50}
+              className=" mt-5"
+              src="/images/logo_ana.png"
+              width={60}
+              height={60}
+              alt="logo ANA"
+            />
+            <Image
+              className="mt-5 mb-1"
+              src="/images/logo_lonja.png"
+              width={60}
+              height={60}
               alt="logo lonja"
             />
           </div>

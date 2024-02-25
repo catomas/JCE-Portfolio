@@ -16,7 +16,9 @@ export const ContactMe = () => {
 
       <Link href="tel:+573164156157" target="_blank" className="flex mt-2 ">
         <MdLocalPhone size="25" />
-        <h4 className="ml-2  text-lg font-workSans">+57 3164156157</h4>
+        <h4 className="ml-2  text-base sm:text-lg font-workSans">
+          +57 3164156157
+        </h4>
       </Link>
 
       <Link
@@ -25,7 +27,7 @@ export const ContactMe = () => {
         className="flex mt-2"
       >
         <MdOutlineEmail size="25" />
-        <h4 className="ml-2 font-workSans text-lg">
+        <h4 className="ml-2 font-workSans text-base sm:text-lg">
           juancarlos@juancarlosavaluos.com
         </h4>
       </Link>
@@ -36,8 +38,9 @@ export const ContactMe = () => {
         className="flex mt-2"
       >
         <LuInstagram size="25" />
-
-        <h4 className="ml-2  text-lg font-workSans">@juancarlosavaluos</h4>
+        <h4 className="ml-2  text-base font-workSans sm:text-lg">
+          @juancarlosavaluos
+        </h4>
       </Link>
 
       <Image
