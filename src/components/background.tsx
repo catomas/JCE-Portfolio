@@ -1,6 +1,6 @@
 const Background = () => {
   return (
-    <div className="relative  isolate">
+    <div className="fixed z-o inset-0 isolate h-screen w-screen overflow-hidden ">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 o-z-10 transform-gpu overflow-hidden blur-3xl -top-20   sm:-top-80"

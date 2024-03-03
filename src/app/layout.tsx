@@ -27,7 +27,7 @@ export default function RootLayout({
         <ToastProvider />
         <Background />
         <Navbar />
-        <div className="container py-32 sm:py-40 md:py-44">{children}</div>
+        <div className="container py-10 ">{children}</div>
       </body>
     </html>
   );

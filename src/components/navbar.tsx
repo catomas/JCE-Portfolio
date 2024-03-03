@@ -27,7 +27,7 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="z-[50] font-vollkorn fixed bg-slate w-full top-0 left-0 bg-gray-50 border-b-2 md:border-b-0  py-3 md:bg-transparent"
+      className="z-[50] font-vollkorn sticky  bg-slate w-full top-0 left-0 bg-gray-50 border-b-2 md:border-b-0  py-3 md:bg-transparent"
     >
       <nav className="max-w-[1700px] mx-auto h-20 md:h-28 flex justify-between items-center p-4">
         <motion.div
