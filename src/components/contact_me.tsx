@@ -8,7 +8,7 @@ export const ContactMe = () => {
     <div className="  flex flex-col lg:pr-20">
       <h1 className=" font-vollkorn text-4xl md:text-6xl ">Contáctame</h1>
       <p className=" font-vollkorn italic text-lg   mt-2 mb-7">
-        &quot;Si estás interesado en mis servicios de evaluación o tienes alguna
+        &quot;Si estás interesado en mis servicios de avaluador o tienes alguna
         pregunta, no dudes en ponerte en contacto conmigo. Estoy aquí para
         ayudarte a encontrar soluciones adecuadas para tus necesidades de
         valoración.&quot;

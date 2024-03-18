@@ -26,11 +26,11 @@ export const HomePageComponent = () => {
       <div className="flex flex-col lg:flex-row">
         <motion.div {...useMotionProps()} className="pb-6 italic  sm:text-xl">
           <p>
-            &quot;Soy un experimentado avaluador certificado por la Lonja de
-            Avaluadores y la A.N.A, con una sólida trayectoria en el campo de la
-            valoración de bienes. Con años de experiencia en la industria, estoy
-            comprometido a proporcionar evaluaciones precisas y confiables para
-            una variedad de propósitos&quot;
+            &quot;Soy un experimentado avaluador certificado por la Lonja el
+            gremio inmobiliario y la A.N.A, con una sólida trayectoria en el
+            campo de la valoración de bienes. Con años de experiencia en la
+            industria, estoy comprometido a proporcionar evaluaciones precisas y
+            confiables para una variedad de propósitos&quot;
           </p>
           <div className="flex gap-4  items-end justify-end">
             <Image
