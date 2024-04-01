@@ -4,6 +4,7 @@ import "./globals.css";
 import Background from "@/components/background";
 import Navbar from "@/components/navbar";
 import { ToastProvider } from "@/providers/toast-provider";
+import { Footer } from "@/components/footer";
 
 const vollkorn = Vollkorn({ subsets: ["latin"], variable: "--font-vollkorn" });
 const workSans = Work_Sans({
@@ -23,11 +24,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${vollkorn.variable} ${workSans.variable} bg-gray-50 `}>
+      <body
+        className={`${vollkorn.variable} ${workSans.variable} bg-gray-50 flex flex-col min-h-screen `}
+      >
         <ToastProvider />
         <Background />
         <Navbar />
         <div className="container py-10 ">{children}</div>
+        <Footer />
       </body>
     </html>
   );

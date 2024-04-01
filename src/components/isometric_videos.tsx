@@ -43,6 +43,7 @@ const IsometricVideos = () => {
           isFirstVideoPlaying ? "" : "hidden"
         }`}
         autoPlay
+        preload="auto"
         muted
         onEnded={handleVideoEnd}
         onLoadedData={handleVideoLoad}
@@ -58,6 +59,7 @@ const IsometricVideos = () => {
         }`}
         loop
         muted
+        preload="auto"
         controls={false}
         playsInline
       >
