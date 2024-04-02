@@ -38,7 +38,7 @@ const Navbar = () => {
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-          className=" flex items-center justify-center relative h-40 w-40  md:h-52 md:w-52 md:hidden lg:flex "
+          className="fixed flex items-center justify-center  h-40 w-40  md:h-52 md:w-52 md:hidden lg:flex "
         >
           <Link href="/">
             <Image

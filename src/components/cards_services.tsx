@@ -10,13 +10,17 @@ import Image from "next/image";
 
 import { services } from "@/lib/data";
 import DialogService from "./dialog_service";
+import Background from "./background";
 
 export const CardsServices = () => {
   return (
     <div className="grid lg:grid-cols-2 gap-6 lg:mx-28">
       {services.map((service) => {
         return (
-          <Card className="flex flex-col justify-between" key={service.title}>
+          <Card
+            className="flex bg-transparent  shadow-lg   flex-col justify-between"
+            key={service.title}
+          >
             <CardHeader>
               <CardTitle className="pb-2">{service.title}</CardTitle>
               <CardDescription>{service.description}</CardDescription>

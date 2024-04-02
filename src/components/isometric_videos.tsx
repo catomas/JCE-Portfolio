@@ -31,7 +31,7 @@ const IsometricVideos = () => {
     }
   };
   return (
-    <div className=" ">
+    <div className=" z-[-30] ">
       {/* {isLoading && (
         <div className="flex justify-center items-center h-[400px] xl:min-h-[500px]">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -39,7 +39,7 @@ const IsometricVideos = () => {
       )} */}
       <video
         ref={firstVideoRef}
-        className={`h-auto w-auto border-none outline-none    ${
+        className={`h-auto w-auto border-none outline-none bg-transparent   ${
           isFirstVideoPlaying ? "" : "hidden"
         }`}
         autoPlay
@@ -54,7 +54,7 @@ const IsometricVideos = () => {
       </video>
       <video
         ref={secondVideoRef}
-        className={`h-auto w-auto border-none outline-none    ${
+        className={`h-auto w-auto border-none outline-none bg-transparent    ${
           isFirstVideoPlaying ? "hidden" : ""
         }`}
         loop

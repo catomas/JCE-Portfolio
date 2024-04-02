@@ -25,24 +25,26 @@ export default function DialogService({ service }: DialogServiceProps) {
   );
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Saber más</Button>
-      </DialogTrigger>
-      <DialogContent className=" max-h-screen  moverflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>{service.title}</DialogTitle>
-          <DialogDescription className=" whitespace-pre-line ">
-            <p dangerouslySetInnerHTML={{ __html: detailsWithBoldNumbers }} />
-          </DialogDescription>
-        </DialogHeader>
+    <>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="z-10">Saber más</Button>
+        </DialogTrigger>
+        <DialogContent className=" max-h-screen  moverflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{service.title}</DialogTitle>
+            <DialogDescription className=" whitespace-pre-line ">
+              <p dangerouslySetInnerHTML={{ __html: detailsWithBoldNumbers }} />
+            </DialogDescription>
+          </DialogHeader>
 
-        <DialogFooter className=" flex !justify-center items-center">
-          <div className=" w-[200px] md:w-[300px]  ">
-            <Image src="icons/park.svg" width={300} height={300} alt="park" />
-          </div>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          <DialogFooter className=" flex !justify-center items-center">
+            <div className=" w-[200px] md:w-[300px]  ">
+              <Image src="icons/park.svg" width={300} height={300} alt="park" />
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
