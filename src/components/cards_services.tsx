@@ -18,7 +18,7 @@ export const CardsServices = () => {
       {services.map((service) => {
         return (
           <Card
-            className="flex bg-transparent  shadow-lg   flex-col justify-between"
+            className="flex bg-transparent border-none  shadow-lg   flex-col justify-between"
             key={service.title}
           >
             <CardHeader>
