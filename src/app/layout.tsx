@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${vollkorn.variable} ${workSans.variable} bg-gray-50 flex flex-col min-h-screen `}
+        suppressHydrationWarning
       >
         <ToastProvider />
         <Background />

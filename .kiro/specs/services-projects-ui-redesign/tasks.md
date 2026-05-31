@@ -6,32 +6,32 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
 
 ## Tasks
 
-- [-] 1. Set up data layer, interfaces, and utilities
-  - [ ] 1.1 Create shared type interfaces (Project, Service) in `src/lib/data/types.ts`
+- [x] 1. Set up data layer, interfaces, and utilities
+  - [x] 1.1 Create shared type interfaces (Project, Service) in `src/lib/data/types.ts`
     - Define `Project` interface with slug, title, description, images, category, location, date fields
     - Define `Service` interface with title, description, details, icon, accentColor fields
     - Include index signature `[key: string]: unknown` on Project for forward compatibility
     - _Requirements: 10.3, 10.4_
 
-  - [ ] 1.2 Implement `slugify` utility function in `src/lib/utils.ts`
+  - [x] 1.2 Implement `slugify` utility function in `src/lib/utils.ts`
     - Handle accented characters (NFD normalization + diacritic removal)
     - Replace non-alphanumeric with hyphens, trim leading/trailing hyphens
     - Ensure no consecutive hyphens in output
     - _Requirements: 6.1_
 
-  - [ ] 1.3 Create data abstraction layer for services in `src/lib/data/services.ts`
+  - [x] 1.3 Create data abstraction layer for services in `src/lib/data/services.ts`
     - Implement `getServices(): Promise<Service[]>` reading from static data
     - Migrate existing service data adding `accentColor` field with unique values per service
     - _Requirements: 10.1, 10.4, 1.5_
 
-  - [ ] 1.4 Create data abstraction layer for projects in `src/lib/data/projects.ts`
+  - [x] 1.4 Create data abstraction layer for projects in `src/lib/data/projects.ts`
     - Implement `getProjects(): Promise<Project[]>` reading from static data
     - Implement `getProjectBySlug(slug: string): Promise<Project | null>`
     - Implement `getProjectCategories(): Promise<string[]>` extracting unique non-empty categories
     - Migrate existing project data adding slug, category, location, date fields
     - _Requirements: 10.1, 10.2, 10.5_
 
-  - [ ] 1.5 Create `useReducedMotion` hook in `src/hooks/use-reduced-motion.ts`
+  - [x] 1.5 Create `useReducedMotion` hook in `src/hooks/use-reduced-motion.ts`
     - Use `window.matchMedia('(prefers-reduced-motion: reduce)')` with listener for changes
     - Return boolean indicating if reduced motion is preferred
     - _Requirements: 8.4_
@@ -49,18 +49,18 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Verify Service field constraints (title ≤ 200, description ≤ 500, details ≤ 5000, icon ends .svg)
     - **Validates: Requirements 10.3, 10.4**
 
-- [ ] 2. Checkpoint - Ensure data layer tests pass
+- [x] 2. Checkpoint - Ensure data layer tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 3. Implement Services section components
-  - [ ] 3.1 Create `ServiceCard` component in `src/components/services/service-card.tsx`
+- [x] 3. Implement Services section components
+  - [x] 3.1 Create `ServiceCard` component in `src/components/services/service-card.tsx`
     - Render icon with accent color background, title, truncated description (120 chars), "Saber más" button
     - Implement staggered entry animation with `motion.div` (fadeIn + translateY) using index-based delay
     - Implement hover micro-interaction: translateY -4px, shadow increase, scale 1.03 (200-300ms)
     - Show full info on touch devices without hover dependency
     - _Requirements: 1.1, 1.2, 1.4, 1.5, 1.6_
 
-  - [ ] 3.2 Create `ServiceDetailPanel` component in `src/components/services/service-detail-panel.tsx`
+  - [x] 3.2 Create `ServiceDetailPanel` component in `src/components/services/service-detail-panel.tsx`
     - Build on Radix Dialog with role="dialog", aria-modal, aria-labelledby
     - Render header with icon + large title, body with typographic hierarchy (h3 sections, p body)
     - Render categories as individual badge/chip elements
@@ -70,7 +70,7 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Block background scroll while open
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7_
 
-  - [ ] 3.3 Create `ServicesSection` orchestrator in `src/components/services/services-section.tsx`
+  - [x] 3.3 Create `ServicesSection` orchestrator in `src/components/services/services-section.tsx`
     - Consume data via `getServices()` abstraction layer
     - Render responsive grid: 1 col mobile, 2 cols tablet, 2 cols desktop with uniform gap
     - Trigger staggered animations when section enters viewport (20% threshold, once)
@@ -83,8 +83,8 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Verify all accentColor values in services data are pairwise distinct
     - **Validates: Requirements 1.5**
 
-- [ ] 4. Implement Projects section components (Grid, Carousel, Filters)
-  - [ ] 4.1 Create `ProjectCard` component in `src/components/projects/project-card.tsx`
+- [x] 4. Implement Projects section components (Grid, Carousel, Filters)
+  - [x] 4.1 Create `ProjectCard` component in `src/components/projects/project-card.tsx`
     - Render Next.js Image with aspect-ratio 4:3, blur placeholder, responsive sizes
     - Implement overlay with gradient on hover: title + location + "Ver proyecto" (200-400ms opacity)
     - Show overlay permanently on touch devices
@@ -92,19 +92,19 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Support `priority` prop for LCP images (first visible cards)
     - _Requirements: 3.3, 3.4, 3.5, 3.6, 6.1, 9.2, 9.4_
 
-  - [ ] 4.2 Create `CategoryFilter` component in `src/components/projects/category-filter.tsx`
+  - [x] 4.2 Create `CategoryFilter` component in `src/components/projects/category-filter.tsx`
     - Render "Todos" button + buttons for each unique category
     - Differentiate active style (solid background vs outline)
     - Animate active indicator with `motion.div` layoutId
     - Ensure 44x44px minimum touch targets on mobile/tablet
     - _Requirements: 5.1, 5.2, 5.4, 9.7_
 
-  - [ ] 4.3 Create `ViewToggle` component in `src/components/projects/view-toggle.tsx`
+  - [x] 4.3 Create `ViewToggle` component in `src/components/projects/view-toggle.tsx`
     - Render grid/carousel icons with visual indicator of active mode
     - Ensure 44x44px minimum touch targets
     - _Requirements: 4.1_
 
-  - [ ] 4.4 Create `ProjectGrid` component in `src/components/projects/project-grid.tsx`
+  - [x] 4.4 Create `ProjectGrid` component in `src/components/projects/project-grid.tsx`
     - Responsive grid: 1 col mobile, 2 cols tablet, 3 cols desktop
     - Implement `AnimatePresence` + `LayoutGroup` for filter transitions (300-600ms)
     - Animate exit of non-matching projects (opacity + scale, 200-400ms)
@@ -112,7 +112,7 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Show "No hay proyectos en esta categoría" when filtered result is empty
     - _Requirements: 3.1, 3.2, 3.5, 5.3, 5.5, 5.6_
 
-  - [ ] 4.5 Create `ProjectCarousel` component in `src/components/projects/project-carousel.tsx`
+  - [x] 4.5 Create `ProjectCarousel` component in `src/components/projects/project-carousel.tsx`
     - Use embla-carousel-react with autoplay plugin (5000ms interval)
     - Configure loop infinite, pause on hover/touch/controls, resume after 3000ms inactivity
     - Responsive slides: 1 visible mobile, 2 tablet, 2.5 desktop (50% third slide)
@@ -121,7 +121,7 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Transition duration ≤ 300ms
     - _Requirements: 4.2, 4.3, 4.4, 4.5, 4.6_
 
-  - [ ] 4.6 Create `ProjectsSection` orchestrator in `src/components/projects/projects-section.tsx`
+  - [x] 4.6 Create `ProjectsSection` orchestrator in `src/components/projects/projects-section.tsx`
     - Manage state: activeView (grid/carousel), activeCategory, filtered projects
     - Consume data via `getProjects()` and `getProjectCategories()`
     - Render ViewToggle + CategoryFilter + (ProjectGrid | ProjectCarousel)
@@ -141,11 +141,11 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Verify "Todos" returns all projects unfiltered
     - **Validates: Requirements 5.3**
 
-- [ ] 5. Checkpoint - Ensure services and projects components work
+- [x] 5. Checkpoint - Ensure services and projects components work
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Implement Project Detail Page with Gallery and Lightbox
-  - [ ] 6.1 Create project detail page at `src/app/projects/[slug]/page.tsx`
+- [x] 6. Implement Project Detail Page with Gallery and Lightbox
+  - [x] 6.1 Create project detail page at `src/app/projects/[slug]/page.tsx`
     - Use `generateStaticParams` for SSG with all project slugs
     - Fetch project via `getProjectBySlug(slug)`
     - Return `notFound()` if project is null
@@ -155,19 +155,19 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Page transition animation (300-600ms)
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.6_
 
-  - [ ] 6.2 Generate SEO metadata for project detail page
+  - [x] 6.2 Generate SEO metadata for project detail page
     - Export `generateMetadata` function deriving title and description from project data
     - Title contains project title, description derived from project description
     - _Requirements: 6.5_
 
-  - [ ] 6.3 Create `ProjectGallery` component in `src/components/projects/project-gallery.tsx`
+  - [x] 6.3 Create `ProjectGallery` component in `src/components/projects/project-gallery.tsx`
     - Responsive thumbnail grid: 2 cols mobile, 3 cols tablet, 4 cols desktop
     - Aspect ratio 4:3 for all thumbnails
     - Lazy loading for images not in initial viewport
     - Click on thumbnail opens Lightbox at that index
     - _Requirements: 7.1, 9.3_
 
-  - [ ] 6.4 Create `Lightbox` component in `src/components/projects/lightbox.tsx`
+  - [x] 6.4 Create `Lightbox` component in `src/components/projects/lightbox.tsx`
     - Build on Radix Dialog for focus trap, portal, ARIA
     - Navigation: keyboard arrows, prev/next buttons, swipe gestures
     - Disable prev at first image, next at last image
@@ -195,24 +195,24 @@ Implementación incremental del rediseño de las secciones de Servicios y Proyec
     - Verify zoom resets to 1.0 on navigation
     - **Validates: Requirements 7.4**
 
-- [ ] 7. Checkpoint - Ensure detail page and lightbox work
+- [~] 7. Checkpoint - Ensure detail page and lightbox work
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 8. Integration, accessibility, and forward compatibility
-  - [ ] 8.1 Wire services section into existing page layout
+- [x] 8. Integration, accessibility, and forward compatibility
+  - [~] 8.1 Wire services section into existing page layout
     - Replace current services implementation with new ServicesSection
     - Ensure ErrorBoundary wraps the section
     - Verify keyboard navigation (Tab, Enter, Escape)
     - _Requirements: 1.1, 9.5, 10.6_
 
-  - [ ] 8.2 Wire projects section into existing page layout and create `/projects` route
+  - [~] 8.2 Wire projects section into existing page layout and create `/projects` route
     - Replace current projects implementation with new ProjectsSection
     - Create `src/app/projects/page.tsx` if not existing
     - Ensure ErrorBoundary wraps the section
     - Verify keyboard navigation (Tab, Enter, Escape, arrows)
     - _Requirements: 3.1, 4.1, 9.5, 10.6_
 
-  - [ ] 8.3 Implement performance optimizations
+  - [~] 8.3 Implement performance optimizations
     - Configure `priority` prop on first visible ProjectCards for LCP
     - Verify responsive `sizes` attribute on all Next.js Images
     - Ensure blur placeholders are generated for all project images

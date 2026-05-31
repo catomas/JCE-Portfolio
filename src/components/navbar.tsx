@@ -19,8 +19,7 @@ const Navbar = () => {
     setMenuIcon(!menuIcon);
   };
 
-  let currentPathWithoutSlash =
-    pathname === "/" ? "/" : pathname.replace("/", "");
+  let currentPathWithoutSlash = pathname;
 
   return (
     <motion.header
@@ -65,7 +64,9 @@ const Navbar = () => {
                         "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white transition-[0.5s] duration-[ease-in-out] ",
                         {
                           " bg-[rgba(133,135,122,0.9)] rounded-full text-white ":
-                            currentPathWithoutSlash === link.hash,
+                            link.hash === "/"
+                              ? currentPathWithoutSlash === "/"
+                              : currentPathWithoutSlash.startsWith(link.hash),
                         }
                       )}
                     >
@@ -122,7 +123,9 @@ const Navbar = () => {
                         "flex  w-full items-center justify-center px-4 py-1 m-1 hover:text-white  transition ",
                         {
                           " bg-[rgba(133,135,122,1)] rounded-full text-white ":
-                            currentPathWithoutSlash === link.hash,
+                            link.hash === "/"
+                              ? currentPathWithoutSlash === "/"
+                              : currentPathWithoutSlash.startsWith(link.hash),
                         }
                       )}
                     >

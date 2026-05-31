@@ -21,6 +21,22 @@ export function generateSlug(text: string): string {
     .replace(/^-|-$/g, '') // Remove leading/trailing hyphens
 }
 
+/**
+ * Generate a URL-friendly slug from a string.
+ * Handles accented characters (NFD normalization + diacritic removal),
+ * replaces non-alphanumeric characters with hyphens, collapses consecutive
+ * hyphens, and trims leading/trailing hyphens.
+ */
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')   // Remove diacritics/accents
+    .replace(/[^a-z0-9]+/g, '-')       // Replace non-alphanumeric with hyphens
+    .replace(/-{2,}/g, '-')            // Collapse consecutive hyphens
+    .replace(/(^-|-$)/g, '');          // Trim leading/trailing hyphens
+}
+
 const DEFAULT_DATE_OPTIONS: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
 /**

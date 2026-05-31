@@ -7,19 +7,19 @@ export const links = [
   },
   {
     name: "Experiencia",
-    hash: "experience",
+    hash: "/experience",
   },
   {
     name: "Servicios",
-    hash: "services",
+    hash: "/services",
   },
   {
     name: "Proyectos",
-    hash: "projects",
+    hash: "/projects",
   },
   {
     name: "Contacto",
-    hash: "contact",
+    hash: "/contact",
   },
 ] as const;
 
