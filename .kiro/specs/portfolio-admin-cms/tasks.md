@@ -43,7 +43,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - **Property 9: Seed Idempotency**
     - **Validates: Requirements 9.6**
 
-- [ ] 2. Autenticación y middleware de seguridad
+- [x] 2. Autenticación y middleware de seguridad
   - [x] 2.1 Configurar Auth.js v5 con Credentials provider
     - Crear `src/lib/auth.ts` con configuración de NextAuth v5
     - Implementar Credentials provider con verificación bcrypt
@@ -52,7 +52,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Crear `src/app/api/auth/[...nextauth]/route.ts`
     - _Requirements: 1.2, 1.4, 1.6_
 
-  - [ ] 2.2 Implementar middleware de protección de rutas y rate limiting
+  - [x] 2.2 Implementar middleware de protección de rutas y rate limiting
     - Crear `src/middleware.ts` que proteja todas las rutas `/admin/*` excepto `/admin/login`
     - Implementar verificación de sesión Auth.js
     - Redirigir a `/admin/login?callbackUrl=...` si no autenticado
@@ -60,7 +60,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Configurar rate limiting: 5 mensajes/15min en `/api/contact`
     - _Requirements: 1.5, 1.7, 13.7_
 
-  - [ ] 2.3 Crear página de login del panel admin
+  - [x] 2.3 Crear página de login del panel admin
     - Crear `src/app/admin/login/page.tsx` con formulario de email y contraseña
     - Implementar validación client-side con Zod (loginSchema)
     - Mostrar mensaje de error genérico en credenciales inválidas (sin revelar qué campo falló)
@@ -80,8 +80,8 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - **Property 20: Login Error Message Uniformity**
     - **Validates: Requirements 1.3**
 
-- [ ] 3. Schemas de validación y tipos compartidos
-  - [ ] 3.1 Crear schemas de validación Zod para todas las entidades
+- [x] 3. Schemas de validación y tipos compartidos
+  - [x] 3.1 Crear schemas de validación Zod para todas las entidades
     - Crear `src/lib/validations/project.ts` (title max 100, description max 2000, status enum)
     - Crear `src/lib/validations/service.ts` (title max 100, shortDescription max 200, detailedDescription max 2000, iconSvg)
     - Crear `src/lib/validations/experience.ts` (title max 100, location max 150, date, description max 500, category enum)
@@ -91,7 +91,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Crear `src/lib/validations/contact.ts` (name max 100, email max 254, phone max 20, subject max 150, message max 2000)
     - _Requirements: 2.2, 2.4, 3.2, 3.4, 4.2, 4.6, 5.1, 5.5, 6.2, 6.3, 6.5, 8.1, 8.6, 13.1, 13.4_
 
-  - [ ] 3.2 Crear tipos compartidos y utilidades
+  - [x] 3.2 Crear tipos compartidos y utilidades
     - Crear `src/lib/types.ts` con ActionResult<T> y PaginatedResult<T>
     - Crear utilidades en `src/lib/utils.ts`: generateSlug, formatDate, truncateText, getInitials
     - Crear `src/lib/validations/media.ts` con validación de formato y tamaño (5MB imágenes, 50MB videos)
@@ -105,30 +105,30 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - **Property 6: Media Upload Validation**
     - **Validates: Requirements 2.8, 2.9, 7.2, 7.3, 7.4, 16.4**
 
-- [ ] 4. Checkpoint - Verificar infraestructura base
+- [x] 4. Checkpoint - Verificar infraestructura base
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 5. Server Actions - Gestión de contenido
-  - [ ] 5.1 Implementar Server Actions de proyectos
+  - [x] 5.1 Implementar Server Actions de proyectos
     - Crear `src/lib/actions/projects.ts` con: createProject, updateProject, deleteProject, reorderProjects, toggleProjectStatus
     - Implementar validación con projectSchema, transacciones Prisma, generación de slug
     - Implementar revalidación de caché con revalidatePath/revalidateTag
     - Manejar errores de constraint (slug duplicado) y conexión
     - _Requirements: 2.2, 2.3, 2.5, 2.6, 2.7, 9.3, 9.4_
 
-  - [ ] 5.2 Implementar Server Actions de servicios
+  - [x] 5.2 Implementar Server Actions de servicios
     - Crear `src/lib/actions/services.ts` con: createService, updateService, deleteService, reorderServices
     - Implementar validación con serviceSchema, transacciones Prisma
     - Implementar revalidación de caché
     - _Requirements: 3.2, 3.3, 3.5, 3.6, 9.3, 9.4_
 
-  - [ ] 5.3 Implementar Server Actions de experiencia
+  - [x] 5.3 Implementar Server Actions de experiencia
     - Crear `src/lib/actions/experience.ts` con: createExperience, updateExperience, deleteExperience
     - Implementar validación con experienceSchema, cálculo de sortDate para ordenamiento
     - Implementar revalidación de caché
     - _Requirements: 4.2, 4.3, 4.4, 9.3, 9.4_
 
-  - [ ] 5.4 Implementar Server Actions de perfil y estadísticas
+  - [-] 5.4 Implementar Server Actions de perfil y estadísticas
     - Crear `src/lib/actions/profile.ts` con: updateProfile
     - Crear `src/lib/actions/statistics.ts` con: createStatistic, updateStatistic, deleteStatistic
     - Implementar validación con profileSchema y statisticSchema

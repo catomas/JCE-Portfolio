@@ -51,7 +51,7 @@ export default auth(async function middleware(request) {
     if (!success) {
       return NextResponse.json(
         {
-          error: 'Se ha excedido el número máximo de intentos. Intente nuevamente en 15 minutos.',
+          error: 'Ha excedido el número máximo de intentos. Intente nuevamente en 15 minutos.',
           resetAt: reset,
         },
         { status: 429 }
@@ -67,7 +67,7 @@ export default auth(async function middleware(request) {
     if (!success) {
       return NextResponse.json(
         {
-          error: 'Ha enviado demasiados mensajes. Intente nuevamente en 15 minutos.',
+          error: 'Ha excedido el número máximo de intentos. Intente nuevamente en 15 minutos.',
           resetAt: reset,
         },
         { status: 429 }
