@@ -34,7 +34,7 @@ export default function DialogService({ service }: DialogServiceProps) {
           <DialogHeader>
             <DialogTitle>{service.title}</DialogTitle>
             <DialogDescription className=" whitespace-pre-line ">
-              <p dangerouslySetInnerHTML={{ __html: detailsWithBoldNumbers }} />
+              <span dangerouslySetInnerHTML={{ __html: detailsWithBoldNumbers }} />
             </DialogDescription>
           </DialogHeader>
 
