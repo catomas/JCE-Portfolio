@@ -16,7 +16,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Actualizar `postcss.config.js` y configuración de Tailwind CSS 4
     - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.7, 15.8_
 
-  - [ ] 1.2 Configurar estructura de directorios y archivos base
+  - [x] 1.2 Configurar estructura de directorios y archivos base
     - Crear estructura `src/app/(public)/`, `src/app/admin/`, `src/app/api/`
     - Crear directorios `src/components/public/`, `src/components/admin/`, `src/components/ui/`
     - Crear directorios `src/lib/actions/`, `src/lib/validations/`
