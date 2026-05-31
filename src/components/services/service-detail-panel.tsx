@@ -30,7 +30,6 @@ function parseServiceDetails(details: string): {
 
   for (const line of lines) {
     const trimmed = line.trim();
-    // Match numbered list items like "1. Item text"
     const match = /^\d+\.\s+(.+)$/.exec(trimmed);
     if (match) {
       categories.push(match[1]);
@@ -51,23 +50,23 @@ const overlayVariants = {
 };
 
 const contentVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    scale: 1,
-    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+    y: 0,
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   },
   exit: {
     opacity: 0,
-    scale: 0.95,
+    y: 20,
     transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 const reducedMotionVariants = {
-  hidden: { opacity: 1, scale: 1 },
-  visible: { opacity: 1, scale: 1 },
-  exit: { opacity: 1, scale: 1 },
+  hidden: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 1, y: 0 },
 };
 
 export function ServiceDetailPanel({
@@ -88,12 +87,9 @@ export function ServiceDetailPanel({
     ? reducedMotionVariants
     : overlayVariants;
 
-  // Return focus to trigger element on close
   const handleOpenChange = (open: boolean) => {
     if (!open) {
       onClose();
-      // Radix handles focus return natively when using controlled open,
-      // but we ensure it via a timeout as a fallback
       requestAnimationFrame(() => {
         triggerRef.current?.focus();
       });
@@ -108,7 +104,7 @@ export function ServiceDetailPanel({
             {/* Overlay */}
             <DialogPrimitive.Overlay asChild forceMount>
               <motion.div
-                className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+                className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
                 variants={activeOverlayVariants}
                 initial="hidden"
                 animate="visible"
@@ -119,105 +115,130 @@ export function ServiceDetailPanel({
 
             {/* Content */}
             <DialogPrimitive.Content
-              asChild
               forceMount
               aria-labelledby={titleId}
+              className={cn(
+                "fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl",
+                "max-h-[90vh] overflow-hidden",
+                "-translate-x-1/2 -translate-y-1/2",
+                "rounded-2xl bg-background shadow-2xl",
+                "focus:outline-none"
+              )}
               onOpenAutoFocus={(e) => {
-                // Prevent Radix from focusing the close button by default;
-                // let focus go to the dialog content itself for screen readers
                 e.preventDefault();
-                const content = e.currentTarget as HTMLElement;
-                content?.focus();
+                (e.currentTarget as HTMLElement)?.focus();
               }}
               onCloseAutoFocus={(e) => {
                 e.preventDefault();
                 triggerRef.current?.focus();
               }}
             >
+              {/* DialogTitle - required by Radix, must be direct child of Content */}
+              <DialogPrimitive.Title id={titleId} className="sr-only">
+                {service.title}
+              </DialogPrimitive.Title>
+
+              <DialogPrimitive.Description className="sr-only">
+                Información detallada sobre el servicio de {service.title}
+              </DialogPrimitive.Description>
+
               <motion.div
-                className={cn(
-                  "fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-lg",
-                  "max-h-[85vh] overflow-y-auto",
-                  "-translate-x-1/2 -translate-y-1/2",
-                  "rounded-xl border border-border bg-background p-6 shadow-2xl",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                )}
                 variants={activeContentVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                tabIndex={-1}
+                className="flex flex-col max-h-[90vh]"
               >
-                {/* Close button */}
-                <DialogPrimitive.Close
-                  className={cn(
-                    "absolute right-4 top-4 z-10",
-                    "flex h-11 w-11 items-center justify-center rounded-full",
-                    "text-muted-foreground transition-colors",
-                    "hover:bg-accent hover:text-accent-foreground",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  )}
-                  aria-label="Cerrar"
+                {/* Colored header banner */}
+                <div
+                  className="relative flex items-center gap-5 px-8 py-8 sm:py-10"
+                  style={{ backgroundColor: `${service.accentColor}15` }}
                 >
-                  <X className="h-5 w-5" />
-                </DialogPrimitive.Close>
-
-                {/* Header: Icon + Title */}
-                <header className="mb-6 flex items-center gap-4 pr-12">
+                  {/* Decorative accent bar at top */}
                   <div
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: `${service.accentColor}20` }}
+                    className="absolute top-0 left-0 right-0 h-1.5"
+                    style={{ backgroundColor: service.accentColor }}
+                  />
+
+                  {/* Large icon */}
+                  <div
+                    className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl shadow-sm sm:h-24 sm:w-24"
+                    style={{ backgroundColor: `${service.accentColor}25` }}
                   >
                     <Image
                       src={service.icon}
                       alt=""
-                      width={32}
-                      height={32}
-                      className="h-8 w-8"
+                      width={56}
+                      height={56}
+                      className="h-12 w-12 sm:h-14 sm:w-14"
                       aria-hidden="true"
                     />
                   </div>
-                  <DialogPrimitive.Title
-                    id={titleId}
-                    className="text-xl font-bold leading-tight sm:text-2xl"
-                  >
-                    {service.title}
-                  </DialogPrimitive.Title>
-                </header>
 
-                {/* Body */}
-                <div className="space-y-5">
-                  {/* Description section */}
+                  {/* Title */}
+                  <div>
+                    <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+                      {service.title}
+                    </h2>
+                    <p className="mt-1 text-sm font-medium text-muted-foreground">
+                      Servicio profesional
+                    </p>
+                  </div>
+
+                  {/* Close button */}
+                  <DialogPrimitive.Close
+                    className={cn(
+                      "absolute right-4 top-4",
+                      "flex h-11 w-11 items-center justify-center rounded-full",
+                      "text-muted-foreground transition-colors",
+                      "hover:bg-black/10",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    )}
+                    aria-label="Cerrar"
+                  >
+                    <X className="h-5 w-5" />
+                  </DialogPrimitive.Close>
+                </div>
+
+                {/* Scrollable body */}
+                <div className="overflow-y-auto px-8 py-6 space-y-6">
+                  {/* Description */}
                   {intro && (
                     <section>
-                      <h3 className="mb-2 text-base font-semibold text-foreground">
+                      <h3 className="mb-3 text-lg font-semibold text-foreground">
                         Descripción
                       </h3>
-                      <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+                      <p className="text-base leading-relaxed text-muted-foreground whitespace-pre-line">
                         {intro}
                       </p>
                     </section>
                   )}
 
-                  {/* Categories as badges/chips */}
+                  {/* Divider */}
+                  {intro && categories.length > 0 && (
+                    <hr className="border-border" />
+                  )}
+
+                  {/* Categories as styled chips */}
                   {categories.length > 0 && (
                     <section>
-                      <h3 className="mb-3 text-base font-semibold text-foreground">
-                        Categorías
+                      <h3 className="mb-4 text-lg font-semibold text-foreground">
+                        Categorías que manejamos
                       </h3>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2.5">
                         {categories.map((category) => (
                           <span
                             key={category}
                             className={cn(
-                              "inline-flex items-center rounded-full px-3 py-1.5",
-                              "text-xs font-medium",
-                              "border border-border bg-muted text-foreground",
+                              "inline-flex items-center rounded-lg px-4 py-2",
+                              "text-sm font-medium",
+                              "border bg-card text-foreground shadow-sm",
                               "transition-colors"
                             )}
                             style={{
-                              borderColor: `${service.accentColor}40`,
-                              backgroundColor: `${service.accentColor}10`,
+                              borderColor: `${service.accentColor}30`,
+                              borderLeftWidth: "3px",
+                              borderLeftColor: service.accentColor,
                             }}
                           >
                             {category}
@@ -227,23 +248,18 @@ export function ServiceDetailPanel({
                     </section>
                   )}
 
-                  {/* If no categories were parsed, show full details as body text */}
+                  {/* Fallback if no structured content */}
                   {categories.length === 0 && !intro && (
                     <section>
-                      <h3 className="mb-2 text-base font-semibold text-foreground">
-                        Detalles
+                      <h3 className="mb-3 text-lg font-semibold text-foreground">
+                        Detalles del servicio
                       </h3>
-                      <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+                      <p className="text-base leading-relaxed text-muted-foreground whitespace-pre-line">
                         {service.details}
                       </p>
                     </section>
                   )}
                 </div>
-
-                {/* Hidden description for accessibility */}
-                <DialogPrimitive.Description className="sr-only">
-                  Información detallada sobre el servicio de {service.title}
-                </DialogPrimitive.Description>
               </motion.div>
             </DialogPrimitive.Content>
           </DialogPrimitive.Portal>
