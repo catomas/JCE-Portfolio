@@ -1,188 +1,182 @@
-import { transporter } from "@/config/nodemailer";
-import { NextResponse } from "next/server";
-import { mailOptions } from "../../../config/nodemailer";
+import { NextResponse } from 'next/server'
+import prisma, { withRetry } from '@/lib/prisma'
+import { contactSchema } from '@/lib/validations/contact'
+import { transporter, mailOptions } from '@/config/nodemailer'
 
-interface ContactMessage {
-  [key: string]: string; // Add index signature
+/**
+ * Get client IP address from request headers.
+ */
+function getClientIp(request: Request): string {
+  const forwarded = request.headers.get('x-forwarded-for')
+  if (forwarded) {
+    return forwarded.split(',')[0].trim()
+  }
+  return '127.0.0.1'
 }
 
-const CONTACT_MESSAGE_FIELDS: ContactMessage = {
-  name: "Nombre",
-  email: "Correo electrónico",
-  subject: "Asunto",
-  message: "Mensaje",
-};
+/**
+ * Generate email content from contact form data.
+ */
+function generateEmailContent(data: {
+  name: string
+  email: string
+  phone?: string
+  subject: string
+  message: string
+}) {
+  const text = `
+Nuevo mensaje de contacto:
 
-const generateEmailContent = (body: any) => {
-  const stringData = Object.entries(body).reduce((str, [key, value]) => {
-    return (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${value} \n `);
-  }, "");
+Nombre: ${data.name}
+Email: ${data.email}
+${data.phone ? `Teléfono: ${data.phone}\n` : ''}Asunto: ${data.subject}
 
-  const htmlData = Object.entries(body).reduce((str, [key, value]) => {
-    return (str += `<h1>${CONTACT_MESSAGE_FIELDS[key]}:</h1><p>${value}</p>`);
-  }, "");
+Mensaje:
+${data.message}
+  `.trim()
 
-  return {
-    text: stringData,
-    html: `<!DOCTYPE html>
-    <html>
-      <head>
-        <title></title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <style type="text/css">
-          body,
-          table,
-          td,
-          a {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-          }
-          table {
-            border-collapse: collapse !important;
-          }
-          body {
-            height: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-          }
-          @media screen and (max-width: 525px) {
-            .wrapper {
-              width: 100% !important;
-              max-width: 100% !important;
-            }
-            .responsive-table {
-              width: 100% !important;
-            }
-            .padding {
-              padding: 10px 5% 15px 5% !important;
-            }
-            .section-padding {
-              padding: 0 15px 50px 15px !important;
-            }
-          }
-          .form-container {
-            margin-bottom: 24px;
-            padding: 20px;
-            border: 1px dashed #ccc;
-          }
-          .form-heading {
-            color: #2a2a2a;
-            font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-            font-weight: 400;
-            text-align: left;
-            line-height: 20px;
-            font-size: 18px;
-            margin: 0 0 8px;
-            padding: 0;
-          }
-          .form-answer {
-            color: #2a2a2a;
-            font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-            font-weight: 300;
-            text-align: left;
-            line-height: 20px;
-            font-size: 16px;
-            margin: 0 0 24px;
-            padding: 0;
-          }
-          div[style*="margin: 16px 0;"] {
-            margin: 0 !important;
-          }
-        </style>
-      </head>
-      <body style="margin: 0 !important; padding: 0 !important; background: #fff">
-        <div
-          style="
-            display: none;
-            font-size: 1px;
-            color: #fefefe;
-            line-height: 1px;
-            max-height: 0px;
-            max-width: 0px;
-            opacity: 0;
-            overflow: hidden;
-          "
-        ></div>
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-          <tr>
-            <td
-              bgcolor="#ffffff"
-              align="center"
-              style="padding: 10px 15px 30px 15px"
-              class="section-padding"
-            >
-              <table
-                border="0"
-                cellpadding="0"
-                cellspacing="0"
-                width="100%"
-                style="max-width: 500px"
-                class="responsive-table"
-              >
-                <tr>
-                  <td>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td>
-                          <table
-                            width="100%"
-                            border="0"
-                            cellspacing="0"
-                            cellpadding="0"
-                          >
-                            <tr>
-                              <td
-                                style="
-                                  padding: 0 0 0 0;
-                                  font-size: 16px;
-                                  line-height: 25px;
-                                  color: #232323;
-                                "
-                                class="padding message-content"
-                              >
-                                <h2>Nuevo Mensaje de Contacto</h2>
-                                <div class="form-container">${htmlData}</div>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </body>
-    </html>`,
-  };
-};
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background: #f9fafb; }
+    .container { max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .header { background: #1f2937; color: #ffffff; padding: 24px; text-align: center; }
+    .header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+    .content { padding: 24px; }
+    .field { margin-bottom: 16px; }
+    .field-label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .field-value { font-size: 16px; color: #1f2937; line-height: 1.5; }
+    .message-box { background: #f3f4f6; border-radius: 6px; padding: 16px; margin-top: 16px; }
+    .message-box p { margin: 0; font-size: 15px; color: #374151; line-height: 1.6; white-space: pre-wrap; }
+    .footer { padding: 16px 24px; background: #f9fafb; text-align: center; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Nuevo Mensaje de Contacto</h1>
+    </div>
+    <div class="content">
+      <div class="field">
+        <div class="field-label">Nombre</div>
+        <div class="field-value">${escapeHtml(data.name)}</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Email</div>
+        <div class="field-value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
+      </div>
+      ${data.phone ? `<div class="field"><div class="field-label">Teléfono</div><div class="field-value">${escapeHtml(data.phone)}</div></div>` : ''}
+      <div class="field">
+        <div class="field-label">Asunto</div>
+        <div class="field-value">${escapeHtml(data.subject)}</div>
+      </div>
+      <div class="message-box">
+        <div class="field-label">Mensaje</div>
+        <p>${escapeHtml(data.message)}</p>
+      </div>
+    </div>
+    <div class="footer">
+      Este mensaje fue enviado desde el formulario de contacto del portafolio.
+    </div>
+  </div>
+</body>
+</html>`
 
-export async function POST(req: Request) {
-  const body = await req.json();
+  return { text, html }
+}
 
-  if (!body.name || !body.email || !body.subject || !body.message) {
-    return new NextResponse("Missing fields", {
-      status: 400,
-    });
-  }
+/**
+ * Escape HTML special characters to prevent XSS in email content.
+ */
+function escapeHtml(str: string): string {
+  return str
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;')
+}
 
+/**
+ * POST /api/contact
+ *
+ * Handles contact form submissions:
+ * 1. Validates input with Zod schema
+ * 2. Stores the message in the database
+ * 3. Sends notification email to admin via Nodemailer
+ *
+ * Rate limiting is handled by middleware (5 messages / 15 min per IP).
+ *
+ * Requirements: 13.2, 13.3, 13.5, 13.7
+ */
+export async function POST(request: Request) {
   try {
-    await transporter.sendMail({
-      ...mailOptions,
-      ...generateEmailContent(body),
-      subject: body.subject,
-    });
+    const body = await request.json()
 
-    return NextResponse.json({ message: "Email sent" });
+    // 1. Validate input
+    const parsed = contactSchema.safeParse(body)
+    if (!parsed.success) {
+      const fieldErrors = parsed.error.flatten().fieldErrors as Record<string, string[]>
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Validación fallida. Por favor, revise los campos del formulario.',
+          fieldErrors,
+        },
+        { status: 400 }
+      )
+    }
+
+    const { name, email, phone, subject, message } = parsed.data
+    const ipAddress = getClientIp(request)
+
+    // 2. Store message in database
+    const contactMessage = await withRetry(() =>
+      prisma.contactMessage.create({
+        data: {
+          name,
+          email,
+          phone: phone ?? null,
+          subject,
+          message,
+          status: 'UNREAD',
+          ipAddress,
+        },
+      })
+    )
+
+    // 3. Send notification email to admin (non-blocking - don't fail the request if email fails)
+    try {
+      const emailContent = generateEmailContent({ name, email, phone, subject, message })
+      await transporter.sendMail({
+        ...mailOptions,
+        subject: `Nuevo mensaje de contacto: ${subject}`,
+        ...emailContent,
+      })
+    } catch (emailError) {
+      // Log email error but don't fail the request - message is already stored in DB
+      console.error('[Contact API] Error sending notification email:', emailError)
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Su mensaje ha sido recibido. Nos pondremos en contacto pronto.',
+        id: contactMessage.id,
+      },
+      { status: 201 }
+    )
   } catch (error) {
-    console.log(error);
-    return new NextResponse("Failed to send email", {
-      status: 500,
-    });
+    console.error('[Contact API] Error processing contact form:', error)
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Error al procesar su mensaje. Por favor, intente nuevamente.',
+      },
+      { status: 500 }
+    )
   }
 }

@@ -108,7 +108,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
 - [x] 4. Checkpoint - Verificar infraestructura base
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 5. Server Actions - Gestión de contenido
+- [x] 5. Server Actions - Gestión de contenido
   - [x] 5.1 Implementar Server Actions de proyectos
     - Crear `src/lib/actions/projects.ts` con: createProject, updateProject, deleteProject, reorderProjects, toggleProjectStatus
     - Implementar validación con projectSchema, transacciones Prisma, generación de slug
@@ -128,7 +128,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Implementar revalidación de caché
     - _Requirements: 4.2, 4.3, 4.4, 9.3, 9.4_
 
-  - [-] 5.4 Implementar Server Actions de perfil y estadísticas
+  - [x] 5.4 Implementar Server Actions de perfil y estadísticas
     - Crear `src/lib/actions/profile.ts` con: updateProfile
     - Crear `src/lib/actions/statistics.ts` con: createStatistic, updateStatistic, deleteStatistic
     - Implementar validación con profileSchema y statisticSchema
@@ -136,20 +136,20 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Implementar revalidación de caché
     - _Requirements: 5.1, 5.2, 5.3, 5.5, 6.2, 6.3, 6.4, 9.3, 9.4_
 
-  - [ ] 5.5 Implementar Server Actions de testimonios
+  - [x] 5.5 Implementar Server Actions de testimonios
     - Crear `src/lib/actions/testimonials.ts` con: createTestimonial, updateTestimonial, deleteTestimonial, toggleTestimonialStatus
     - Implementar validación con testimonialSchema
     - Implementar revalidación de caché
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 9.3, 9.4_
 
-  - [ ] 5.6 Implementar Server Actions de medios
+  - [x] 5.6 Implementar Server Actions de medios
     - Crear `src/lib/actions/media.ts` con: uploadMedia, deleteMedia, getMediaUsage
     - Configurar `src/lib/cloudinary.ts` con upload, destroy, y transformaciones automáticas (thumbnail 150px, medium 600px, large 1200px)
     - Implementar detección de uso antes de eliminar (consultar ProjectImage)
     - Generar URLs públicas vía CDN de Cloudinary
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 16.2, 16.5_
 
-  - [ ] 5.7 Implementar Server Actions de mensajes y API de contacto
+  - [x] 5.7 Implementar Server Actions de mensajes y API de contacto
     - Crear `src/lib/actions/messages.ts` con: markMessageAsRead, deleteMessage
     - Crear `src/app/api/contact/route.ts` con validación, rate limiting, almacenamiento en DB y envío de email con Nodemailer
     - _Requirements: 13.2, 13.3, 13.5, 13.6, 13.7_
@@ -178,7 +178,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - **Property 8: Pagination Correctness**
     - **Validates: Requirements 7.1, 13.6**
 
-- [ ] 6. Checkpoint - Verificar Server Actions y propiedades
+- [-] 6. Checkpoint - Verificar Server Actions y propiedades
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 7. Panel de administración - Layout y Dashboard
