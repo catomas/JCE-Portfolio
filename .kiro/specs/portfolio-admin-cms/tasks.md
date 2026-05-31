@@ -24,7 +24,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Crear root layout `src/app/layout.tsx` y `src/app/globals.css`
     - _Requirements: 15.1_
 
-  - [ ] 1.3 Configurar Prisma schema y base de datos PostgreSQL
+  - [x] 1.3 Configurar Prisma schema y base de datos PostgreSQL
     - Crear `prisma/schema.prisma` con todos los modelos: User, Session, Profile, SocialLink, Project, ProjectImage, Service, Experience, Statistic, Testimonial, Media, ContactMessage
     - Definir enums: ContentStatus, ExperienceCategory, MediaType, MessageStatus
     - Configurar relaciones y constraints (unique, cascade delete, etc.)
@@ -32,7 +32,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - Generar migración inicial con `prisma migrate dev`
     - _Requirements: 9.1, 9.2, 9.5_
 
-  - [ ] 1.4 Crear script de seed idempotente
+  - [x] 1.4 Crear script de seed idempotente
     - Crear `prisma/seed.ts` que migre el contenido actual de `data.ts` y `data_experience.tsx` a la base de datos
     - Implementar lógica de upsert para garantizar idempotencia (ejecutar múltiples veces sin duplicados)
     - Incluir datos de perfil, proyectos, servicios, experiencia y estadísticas
@@ -44,7 +44,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
     - **Validates: Requirements 9.6**
 
 - [ ] 2. Autenticación y middleware de seguridad
-  - [ ] 2.1 Configurar Auth.js v5 con Credentials provider
+  - [x] 2.1 Configurar Auth.js v5 con Credentials provider
     - Crear `src/lib/auth.ts` con configuración de NextAuth v5
     - Implementar Credentials provider con verificación bcrypt
     - Configurar sesiones en base de datos con TTL de 24 horas
@@ -360,6 +360,7 @@ Este plan transforma el portafolio estático de Next.js en un CMS completo con p
 
 ## Notes
 
+- **Package manager: yarn (NOT npm)**. All install/add/remove commands must use `yarn` or `yarn add`.
 - Tasks marked with `*` are optional and can be skipped for faster MVP
 - Each task references specific requirements for traceability
 - Checkpoints ensure incremental validation

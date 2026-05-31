@@ -1,0 +1,184 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum ContentStatus {
+  PUBLISHED
+  DRAFT
+}
+
+enum ExperienceCategory {
+  EDUCACION
+  CERTIFICACION
+  TRABAJO
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum MessageStatus {
+  READ
+  UNREAD
+}
+
+// ─── Auth Models ─────────────────────────────────────────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  sessions     Session[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Profile ─────────────────────────────────────────────────────────────────
+
+model Profile {
+  id                String       @id @default(cuid())
+  fullName          String       @db.VarChar(100)
+  professionalTitle String       @db.VarChar(120)
+  biography         String       @db.VarChar(2000)
+  profileImageUrl   String?
+  email             String       @db.VarChar(254)
+  phone             String?      @db.VarChar(20)
+  address           String?      @db.VarChar(200)
+  whatsappNumber    String?
+  socialLinks       SocialLink[]
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+model SocialLink {
+  id        String  @id @default(cuid())
+  platform  String  @db.VarChar(50)
+  url       String
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+// ─── Projects ────────────────────────────────────────────────────────────────
+
+model Project {
+  id          String         @id @default(cuid())
+  title       String         @db.VarChar(100)
+  slug        String         @unique
+  description String         @db.VarChar(2000)
+  status      ContentStatus  @default(DRAFT)
+  order       Int            @default(0)
+  images      ProjectImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  url       String
+  mediaId   String?
+  media     Media?  @relation(fields: [mediaId], references: [id], onDelete: SetNull)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  order     Int     @default(0)
+}
+
+// ─── Services ────────────────────────────────────────────────────────────────
+
+model Service {
+  id                  String   @id @default(cuid())
+  title               String   @db.VarChar(100)
+  shortDescription    String   @db.VarChar(200)
+  detailedDescription String   @db.VarChar(2000)
+  iconSvg             String
+  order               Int      @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+// ─── Experience ──────────────────────────────────────────────────────────────
+
+model Experience {
+  id          String             @id @default(cuid())
+  title       String             @db.VarChar(100)
+  location    String             @db.VarChar(150)
+  date        String             @db.VarChar(50)
+  description String             @db.VarChar(500)
+  category    ExperienceCategory
+  sortDate    DateTime
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+// ─── Statistics ──────────────────────────────────────────────────────────────
+
+model Statistic {
+  id        String   @id @default(cuid())
+  value     Int
+  label     String   @db.VarChar(50)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Testimonials ────────────────────────────────────────────────────────────
+
+model Testimonial {
+  id             String        @id @default(cuid())
+  clientName     String        @db.VarChar(100)
+  clientRole     String        @db.VarChar(100)
+  text           String        @db.VarChar(500)
+  clientPhotoUrl String?
+  status         ContentStatus @default(DRAFT)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+// ─── Media ───────────────────────────────────────────────────────────────────
+
+model Media {
+  id            String         @id @default(cuid())
+  filename      String
+  url           String
+  thumbnailUrl  String?
+  mediumUrl     String?
+  largeUrl      String?
+  mimeType      String
+  size          Int
+  type          MediaType
+  cloudinaryId  String?
+  projectImages ProjectImage[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+// ─── Contact Messages ────────────────────────────────────────────────────────
+
+model ContactMessage {
+  id        String        @id @default(cuid())
+  name      String        @db.VarChar(100)
+  email     String        @db.VarChar(254)
+  phone     String?       @db.VarChar(20)
+  subject   String        @db.VarChar(150)
+  message   String        @db.VarChar(2000)
+  status    MessageStatus @default(UNREAD)
+  ipAddress String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
