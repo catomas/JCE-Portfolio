@@ -17,7 +17,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import toast from "react-hot-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   name: z
@@ -45,6 +45,7 @@ const formSchema = z.object({
 
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -72,10 +73,18 @@ export const ContactForm = () => {
 
       form.reset();
       setIsSubmitting(false);
-      toast.success("Mensaje enviado correctamente");
+      toast({
+        title: "Mensaje enviado",
+        description: "Mensaje enviado correctamente",
+        variant: "success",
+      });
     } catch (error) {
       setIsSubmitting(false);
-      toast.error("Error al enviar el mensaje");
+      toast({
+        title: "Error",
+        description: "Error al enviar el mensaje",
+        variant: "destructive",
+      });
     }
   };
 
